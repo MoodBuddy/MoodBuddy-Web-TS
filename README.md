@@ -1,5 +1,7 @@
 # 📔 MoodBuddy - Web
-🦫 대학생 연합 IT동아리 잇타5기 팀 대박징조의 MoodBuddy 프론트엔드 🦫
+🦫 대학생 연합 IT동아리 잇타5기 팀 대박징조의 MoodBuddy 프론트엔드 🦫<br>
+
+❗️ JavaScript에서 TypeScript환경으로 마이그레이션 및 코드 리팩토링을 위한 리포지토리입니다 ❗️
 
 ## 👨‍💻 프로젝트 소개
 ![Slide 16_9 - 536 (1)](https://github.com/user-attachments/assets/61b83563-2496-4d61-aa91-29e4392e656f)

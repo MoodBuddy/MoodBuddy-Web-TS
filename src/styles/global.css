@@ -1,0 +1,187 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css');
+/*inter*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Ownglyph_meetme-Rg';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  background-color: #e8dbcf;
+  white-space: nowrap;
+  min-width: 1280px;
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* 스크롤바 스타일링 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; /* 스크롤바의 너비 */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  width: 30%;
+  height: 30%; /* 스크롤바의 길이 */
+  background: #d8b18e; /* 스크롤바의 색상 */
+  border-radius: 28px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(216, 177, 142, 0.39); /* 스크롤바 뒷 배경 색상 */
+  border-radius: 28px;
+}
+
+.custom-scrollbar {
+  padding-right: 16px; /* 스크롤바와 콘텐츠 사이의 간격 */
+  padding-bottom: 16px;
+}
+
+/*드롭다운 css*/
+@keyframes slide-fade-in-dropdown-animation {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.slide-fade-in-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-in-dropdown > ul {
+  animation: slide-fade-in-dropdown-animation 0.4s ease;
+}
+
+@keyframes slide-fade-out-dropdown-animation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.slide-fade-out-dropdown {
+  overflow: hidden;
+}
+
+.slide-fade-out-dropdown > ul {
+  animation: slide-fade-out-dropdown-animation 0.4s ease;
+  animation-fill-mode: forwards;
+  /*요소가 애니메이션이 끝난 후에도 특정한 상태를 유지하도록 하고자 할 때 사용
+  ex) 드롭다운 메뉴가 화면에서 사라질 때 사용자가 마지막으로 선택한 항목을 유지하고 싶을 때 
+  animation-fill-mode: forwards;를 사용하면 애니메이션이 완료된 후에도 드롭다운 메뉴가 마지막으로 선택한 항목의 상태를 유지하게 된다.*/
+}
+
+/*템플릿 슬라이딩 css*/
+@keyframes slide-fade-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-fade-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.template-enter {
+  animation: slide-fade-in 1s forwards;
+}
+
+.template-exit {
+  animation: slide-fade-out 1s forwards;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.5s infinite;
+}
+.animate-bounce2 {
+  animation: bounce 1.5s infinite;
+}
+.animate-bounce3 {
+  animation: bounce 1.5s infinite;
+}
+.animate-spin {
+  animation: spinSlowEnd 4s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes spinSlowEnd {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+  }
+
+  60% {
+    transform: rotate(1080deg);
+    animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+  }
+  100% {
+    transform: rotate(1080deg);
+    animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+  }
+}
+
+.banner_2_2 {
+  width: 3%;
+}

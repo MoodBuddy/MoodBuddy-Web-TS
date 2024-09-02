@@ -1,0 +1,10 @@
+/* 격자배경 CSS */
+.check {
+  background:
+    linear-gradient(to bottom, transparent 38px, #eee4db 38px) 0 0 / 100vw 39px
+      repeat-y,
+    linear-gradient(to right, transparent 38px, #eee4db 38px) 0 0 / 39px
+      repeat-x;
+
+  background-color: #e8dbcf;
+}

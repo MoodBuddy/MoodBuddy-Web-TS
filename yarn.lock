@@ -1610,6 +1610,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-slick@npm:^0.23.13":
+  version: 0.23.13
+  resolution: "@types/react-slick@npm:0.23.13"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/35dd72dfbac234b8db019fb8af250ac3891e564d13001642353aa0b7c37f6ed1ff1f5e8fa8b034706993c4d27ac1977c031942636cfd05414ee4667d45c8aea6
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
@@ -4503,6 +4512,7 @@ __metadata:
     "@types/node": "npm:^22.5.2"
     "@types/react": "npm:^18.3.5"
     "@types/react-dom": "npm:^18.3.0"
+    "@types/react-slick": "npm:^0.23.13"
     "@vitejs/plugin-react": "npm:^4.2.1"
     autoprefixer: "npm:^10.4.19"
     axios: "npm:^1.7.2"

@@ -19,7 +19,7 @@ const CalendarCard = () => {
 
   return (
     <div className="relative flex justify-end mt-24 mb-36">
-      {/* 좌측 쿼디 이미지 */}
+      좌측 쿼디 이미지
       <div className="hidden xl:block absolute left-[-100px] top-[50%] transform -translate-y-1/2 z-0">
         <img src={helloQuddy} alt="helloQuddy" className="w-[1000px] h-[1000px]"/>
       </div>

@@ -1,14 +1,14 @@
-import { getDaysInMonth, subMonths } from 'date-fns';
-import prevIcon from '../../../../public/icon/prevIcon.svg';
-import { topics } from '../../../constants/TopicList';
-import { emotions } from '../../../constants/EmotionList';
-import TopicStats from './TopicStats';
-import FrequencyStats from './FrequencyStats';
-import { useNavigate } from 'react-router-dom';
-import EmotionStats from './EmotionStats';
-import TypeStats from './TypeStats';
-import { getquddyTI } from '../../../apis/user';
-import { useQuery } from '@tanstack/react-query';
+import { getDaysInMonth, subMonths } from "date-fns";
+import prevIcon from "../../../../public/icon/prevIcon.svg";
+import { topics } from "../../../constants/TopicList";
+import { emotions } from "../../../constants/EmotionList";
+import TopicStats from "./TopicStats";
+import FrequencyStats from "./FrequencyStats";
+import { useNavigate } from "react-router-dom";
+import EmotionStats from "./EmotionStats";
+import TypeStats from "./TypeStats";
+import { getquddyTI } from "@apis/userInfo";
+import { useQuery } from "@tanstack/react-query";
 
 const QuddyTiInfo = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const QuddyTiInfo = () => {
   const daysInMonth = getDaysInMonth(previousMonthDate);
 
   const { isError, data } = useQuery({
-    queryKey: ['quddyTI'],
+    queryKey: ["quddyTI"],
     queryFn: getquddyTI,
     throwOnError: false,
   });

@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { getEmotionNums } from '../../../apis/user';
-import { quddies } from '../../../constants/QuddyList';
+import { useQuery } from "@tanstack/react-query";
+import { getEmotionNums } from "@apis/userInfo";
+import { quddies } from "../../../constants/QuddyList";
 
 const ShowEmotions = () => {
   const { data, isError, error } = useQuery({
-    queryKey: ['emotion'],
+    queryKey: ["emotion"],
     queryFn: () => getEmotionNums(),
   });
 

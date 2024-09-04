@@ -1,17 +1,18 @@
 import { get, post } from "./apiUtils";
+import { Profile, User } from "@type/User";
 
-export const getUserInfo = async () => {
+export const getUserInfo = async (): Promise<User> => {
   try {
-    const data = await get("/api/v1/member/main");
+    const data = await get<User>("/api/v1/member/main");
     return data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const getProfile = async () => {
+export const getProfile = async (): Promise<Profile> => {
   try {
-    const data = await get(`/api/v1/member/main/profile`);
+    const data = await get<Profile>(`/api/v1/member/main/profile`);
     return data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
@@ -19,9 +20,12 @@ export const getProfile = async () => {
 };
 
 // Post profile edit
-export const postProfileEdit = async (formData) => {
+export const postProfileEdit = async (formData: Profile): Promise<Profile> => {
   try {
-    const data = await post("/api/v1/member/main/profile-edit", formData);
+    const data = await post<Profile>(
+      "/api/v1/member/main/profile-edit",
+      formData
+    );
     return data;
   } catch (error) {
     throw new Error("데이터 전송에 실패하였습니다.");

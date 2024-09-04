@@ -1,25 +1,33 @@
-import axios from 'axios';
+import axios, { AxiosRequestHeaders, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import dayjs from 'dayjs';
 import { parseJwtPayload } from './utils';
 
 const client = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL, 
   withCredentials: true,
 });
 
+// 응답 인터셉터 설정
 client.interceptors.response.use(
-  (response) => {
+  (response: AxiosResponse) => {
     return response;
   },
-  (error) => {
-    return error.response;
+  (error: any) => {
+    return Promise.reject(error.response);  // 에러 발생시 에러 응답 반환
   },
 );
 
-client.interceptors.request.use(async (config) => {
+// 요청 인터셉터 설정
+client.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   try {
-    const { token } = JSON.parse(sessionStorage.getItem('session'));
+    const sessionData = sessionStorage.getItem('session');
+    const session = sessionData ? JSON.parse(sessionData) : null;
+    const token = session?.token;
 
+    if (!config.headers) {
+      config.headers = {} as AxiosRequestHeaders;
+    }
+    
     if (token) {
       const payload = parseJwtPayload(token);
       const expirationTime = dayjs.unix(payload.exp);
@@ -27,7 +35,8 @@ client.interceptors.request.use(async (config) => {
       const diffMinutes = expirationTime.diff(currentTime, 'minute');
 
       if (diffMinutes <= 0) {
-        const i = JSON.parse(localStorage.getItem('i'));
+        const iData = localStorage.getItem('i');
+        const i = iData ? JSON.parse(iData) : null;
 
         if (i) {
           const iPayload = parseJwtPayload(i);
@@ -37,19 +46,19 @@ client.interceptors.request.use(async (config) => {
           if (iDiffMinutes <= 0) {
             localStorage.removeItem('i');
             window.location.href = '/';
-            return;
+            return Promise.reject(new Error('Refresh token expired'));
           }
         }
 
         sessionStorage.removeItem('session');
         window.location.href = '/';
-        return;
+        return Promise.reject(new Error('Session token expired'));
       }
 
       config.headers.Authorization = `Bearer ${token}`;
     }
   } catch (e) {
-    return null;
+    return Promise.reject(e);
   }
 
   return config;

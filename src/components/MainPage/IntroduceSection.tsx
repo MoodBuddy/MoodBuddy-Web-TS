@@ -19,7 +19,7 @@ import nextIcon from "../../../public/icon/bannerNextIcon.svg";
 import prevIcon from "../../../public/icon/bannerPrevIcon.svg";
 import { useEffect, useState } from "react";
 import AlertModal from "../common/layout/AlertModal";
-import { checkTodayDiary } from "@apis/userInfo";
+import { checkTodayDiary } from "@apis/userStatic";
 
 function SampleNextArrow(props) {
   const { onClick } = props;

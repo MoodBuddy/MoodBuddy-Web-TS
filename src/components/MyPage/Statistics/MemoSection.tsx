@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../../common/button/Button";
 import { addMonths, format } from "date-fns";
-import { getMonthStatic } from "@apis/userInfo";
+import { getMonthStatic } from "@apis/userStatic";
 import SaveModal from "../../WritingPage/SaveModal";
 import {
   postShortWordToNextMonth,

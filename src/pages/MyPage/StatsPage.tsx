@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { getMonthStatic } from "@apis/userInfo";
+import { getMonthStatic } from "@apis/userStatic";
 import QuddyTiSection from "../../components/MyPage/Statistics/QuddyTiSection";
 import styles from "@styles/check.module.css";
 import Footer from "../../components/common/layout/Footer";

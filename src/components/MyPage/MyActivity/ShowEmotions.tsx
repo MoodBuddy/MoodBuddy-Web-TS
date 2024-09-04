@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getEmotionNums } from "@apis/userInfo";
+import { getEmotionNums } from "@apis/userStatic";
 import { quddies } from "../../../constants/QuddyList";
 
 const ShowEmotions = () => {

@@ -7,7 +7,7 @@ import FrequencyStats from "./FrequencyStats";
 import { useNavigate } from "react-router-dom";
 import EmotionStats from "./EmotionStats";
 import TypeStats from "./TypeStats";
-import { getquddyTI } from "@apis/userInfo";
+import { getquddyTI } from "@apis/userStatic";
 import { useQuery } from "@tanstack/react-query";
 
 const QuddyTiInfo = () => {

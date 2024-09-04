@@ -3,7 +3,7 @@ import { MenuList } from "../../../constants/MenuList";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@apis/user";
-import { checkTodayDiary } from "@apis/userInfo";
+import { checkTodayDiary } from "@apis/userStatic";
 import ProfileInfo from "./ProfileInfo";
 import MyPageDropdown from "./MyPageDropdown";
 import AlertModal from "./AlertModal";

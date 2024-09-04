@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import Dropdown from "./Dropdown";
 import MonthlyCount from "./MonthlyCount";
-import { getDiaryNums } from "@apis/userInfo";
+import { getDiaryNums } from "@apis/userStatic";
 import { useState } from "react";
 
 const DiaryCount = () => {

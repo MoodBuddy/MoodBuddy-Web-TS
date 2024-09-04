@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import back from "../../../public/icon/back.svg";
 import Button from "../common/button/Button";
 import { useState } from "react";
-import { checkTodayDiary } from "@apis/userInfo";
+import { checkTodayDiary } from "@apis/userStatic";
 import AlertModal from "../common/layout/AlertModal";
 import useCalendarClickStore from "../../store/calendarClick";
 const NoWritingPad = () => {

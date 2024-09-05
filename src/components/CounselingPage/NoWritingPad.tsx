@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import back from '../../../public/icon/back.svg';
-import Button from '../common/button/Button';
-import { useState } from 'react';
-import { checkTodayDiary } from '../../apis/user';
-import AlertModal from '../common/layout/AlertModal';
-import useCalendarClickStore from '../../store/calendarClick';
+import { useNavigate } from "react-router-dom";
+import back from "../../../public/icon/back.svg";
+import Button from "../common/button/Button";
+import { useState } from "react";
+import { checkTodayDiary } from "@apis/userStatic";
+import AlertModal from "../common/layout/AlertModal";
+import useCalendarClickStore from "../../store/calendarClick";
 const NoWritingPad = () => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
@@ -18,16 +18,16 @@ const NoWritingPad = () => {
       if (!res.checkTodayDairy) {
         setIsModal(!isModal);
       } else {
-        navigate('/writing');
+        navigate("/writing");
       }
     } catch (error) {
-      console.error('Error checking today diary:', error);
+      console.error("Error checking today diary:", error);
     }
   };
 
   const handleButtonClick = () => {
     setIsModal(false);
-    navigate('/search');
+    navigate("/search");
   };
 
   return (

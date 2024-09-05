@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
-import { getMonthStatic } from '../../apis/user';
-import QuddyTiSection from '../../components/MyPage/Statistics/QuddyTiSection';
-import styles from '@styles/check.module.css';
-import Footer from '../../components/common/layout/Footer';
-import NavBar from '../../components/common/layout/NavBar';
-import StatsTopBar from '../../components/MyPage/Statistics/StatsTopBar';
-import useCalendarStore from '../../store/calendarStore';
-import RankSection from '../../components/MyPage/Statistics/RankSection';
-import MyCalendarSection from '../../components/MyPage/Statistics/MyCalendarSection';
-import MemoSection from '../../components/MyPage/Statistics/MemoSection';
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { getMonthStatic } from "@apis/userStatic";
+import QuddyTiSection from "../../components/MyPage/Statistics/QuddyTiSection";
+import styles from "@styles/check.module.css";
+import Footer from "../../components/common/layout/Footer";
+import NavBar from "../../components/common/layout/NavBar";
+import StatsTopBar from "../../components/MyPage/Statistics/StatsTopBar";
+import useCalendarStore from "../../store/calendarStore";
+import RankSection from "../../components/MyPage/Statistics/RankSection";
+import MyCalendarSection from "../../components/MyPage/Statistics/MyCalendarSection";
+import MemoSection from "../../components/MyPage/Statistics/MemoSection";
 
 const StatsPage = () => {
-  const [shortWord, setShortWord] = useState('');
+  const [shortWord, setShortWord] = useState("");
   const {
     currentDate,
     handlePrevMonth,
@@ -21,14 +21,14 @@ const StatsPage = () => {
     daysInMonth,
     fetchDiaryList,
   } = useCalendarStore();
-  const formattedDate = format(currentDate, 'yyyy-MM-dd');
+  const formattedDate = format(currentDate, "yyyy-MM-dd");
 
   const {
     isError,
     data: emotion,
     error,
   } = useQuery({
-    queryKey: ['emotion', formattedDate],
+    queryKey: ["emotion", formattedDate],
     queryFn: () => getMonthStatic(formattedDate),
   });
 
@@ -37,7 +37,7 @@ const StatsPage = () => {
   }, [currentDate, fetchDiaryList]);
 
   if (isError) {
-    console.error('Error fetching letter:', error);
+    console.error("Error fetching letter:", error);
     return <div>오류 발생: {error.message}</div>;
   }
 
@@ -62,7 +62,10 @@ const StatsPage = () => {
           <QuddyTiSection />
 
           <div className="flex">
-            <RankSection currentDate={currentDate} emotionData={emotion.emotionStaticDtoList} />
+            <RankSection
+              currentDate={currentDate}
+              emotionData={emotion.emotionStaticDtoList}
+            />
             <MyCalendarSection
               currentDate={currentDate}
               daysInMonth={daysInMonth}

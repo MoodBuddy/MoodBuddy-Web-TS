@@ -1,25 +1,25 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import '@styles/slick.css';
-import banner_1 from '@assets/banner/banner_1.svg';
-import banner_1_1_1 from '@assets/banner/banner_1_1_1.svg';
-import banner_1_1_2 from '@assets/banner/banner_1_1_2.svg';
-import banner_1_1_3 from '@assets/banner/banner_1_1_3.svg';
-import banner_2 from '@assets/banner/banner_2.svg';
-import banner_2_1 from '@assets/banner/banner_2_1.svg';
-import banner_2_2 from '@assets/banner/banner_2_2.svg';
+import { Link, useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "@styles/slick.css";
+import banner_1 from "@assets/banner/banner_1.svg";
+import banner_1_1_1 from "@assets/banner/banner_1_1_1.svg";
+import banner_1_1_2 from "@assets/banner/banner_1_1_2.svg";
+import banner_1_1_3 from "@assets/banner/banner_1_1_3.svg";
+import banner_2 from "@assets/banner/banner_2.svg";
+import banner_2_1 from "@assets/banner/banner_2_1.svg";
+import banner_2_2 from "@assets/banner/banner_2_2.svg";
 
-import banner_3 from '@assets/banner/banner_3.svg';
-import banner_4 from '@assets/banner/banner_4.svg';
-import banner_5 from '@assets/banner/banner_5.svg';
-import banner_6 from '@assets/banner/banner_6.svg';
-import nextIcon from '../../../public/icon/bannerNextIcon.svg';
-import prevIcon from '../../../public/icon/bannerPrevIcon.svg';
-import { useEffect, useState } from 'react';
-import AlertModal from '../common/layout/AlertModal';
-import { checkTodayDiary } from '../../apis/user';
+import banner_3 from "@assets/banner/banner_3.svg";
+import banner_4 from "@assets/banner/banner_4.svg";
+import banner_5 from "@assets/banner/banner_5.svg";
+import banner_6 from "@assets/banner/banner_6.svg";
+import nextIcon from "../../../public/icon/bannerNextIcon.svg";
+import prevIcon from "../../../public/icon/bannerPrevIcon.svg";
+import { useEffect, useState } from "react";
+import AlertModal from "../common/layout/AlertModal";
+import { checkTodayDiary } from "@apis/userStatic";
 
 function SampleNextArrow(props) {
   const { onClick } = props;
@@ -61,16 +61,16 @@ const IntroduceSection = () => {
     appendDots: (dots) => (
       <div
         style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <ul>{dots}</ul>
       </div>
     ),
-    dotsClass: 'dots_custom',
+    dotsClass: "dots_custom",
   };
 
   const handleBanner = async () => {
@@ -80,16 +80,16 @@ const IntroduceSection = () => {
       if (!res.checkTodayDairy) {
         setIsModal(!isModal);
       } else {
-        navigate('/writing');
+        navigate("/writing");
       }
     } catch (error) {
-      console.error('Error checking today diary:', error);
+      console.error("Error checking today diary:", error);
     }
   };
 
   const handleButtonClick = () => {
     setIsModal(false);
-    navigate('/search');
+    navigate("/search");
   };
 
   return (

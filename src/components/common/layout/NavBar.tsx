@@ -1,19 +1,20 @@
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { MenuList } from '../../../constants/MenuList';
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { checkTodayDiary, getProfile } from '../../../apis/user';
-import ProfileInfo from './ProfileInfo';
-import MyPageDropdown from './MyPageDropdown';
-import AlertModal from './AlertModal';
-import useCalendarClickStore from '../../../store/calendarClick';
-import useUpdateDiaryStore from '../../../store/updateDiaryStore';
-import useTemporaryDiaryStore from '../../../store/temporaryDiaryStore';
-import useTitleStore from '../../../store/titleStore';
-import useDiaryContentStore from '../../../store/diaryContentStore';
-import useDiaryImgStore from '../../../store/diaryImgStore';
-import useDiaryImgFileStore from '../../../store/diaryImgFileStore';
-import useweatherStore from '../../../store/weatherStore';
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { MenuList } from "../../../constants/MenuList";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "@apis/user";
+import { checkTodayDiary } from "@apis/userStatic";
+import ProfileInfo from "./ProfileInfo";
+import MyPageDropdown from "./MyPageDropdown";
+import AlertModal from "./AlertModal";
+import useCalendarClickStore from "../../../store/calendarClick";
+import useUpdateDiaryStore from "../../../store/updateDiaryStore";
+import useTemporaryDiaryStore from "../../../store/temporaryDiaryStore";
+import useTitleStore from "../../../store/titleStore";
+import useDiaryContentStore from "../../../store/diaryContentStore";
+import useDiaryImgStore from "../../../store/diaryImgStore";
+import useDiaryImgFileStore from "../../../store/diaryImgFileStore";
+import useweatherStore from "../../../store/weatherStore";
 
 const NavBar = () => {
   const [hoveredMyPage, setHoveredMyPage] = useState(false);
@@ -49,7 +50,7 @@ const NavBar = () => {
   };
 
   const { isError, data, error } = useQuery({
-    queryKey: ['getProfile'],
+    queryKey: ["getProfile"],
     queryFn: getProfile,
   });
 
@@ -58,7 +59,7 @@ const NavBar = () => {
   }
 
   if (isError) {
-    console.error('Error fetching user info:', error);
+    console.error("Error fetching user info:", error);
     return <div>오류 발생: {error.message}</div>;
   }
 
@@ -67,7 +68,7 @@ const NavBar = () => {
     isError: diaryError,
     error: diaryErrorDetail,
   } = useQuery({
-    queryKey: ['checkTodayDiary'],
+    queryKey: ["checkTodayDiary"],
     queryFn: checkTodayDiary,
   });
 
@@ -79,9 +80,9 @@ const NavBar = () => {
     setCalendarClick(false);
     setUpdateDiary(false);
     setTemporaryDiary(false);
-    setTitle('');
-    setContent('');
-    setSelectedOption('CLEAR');
+    setTitle("");
+    setContent("");
+    setSelectedOption("CLEAR");
     setDiaryImg([]);
     setImageFiles([]);
     removeImageFile([]);
@@ -106,12 +107,12 @@ const NavBar = () => {
     setUpdateDiary(false);
     setCalendarClick(false);
 
-    navigate('/home');
+    navigate("/home");
   };
 
   const handleButtonClick = () => {
     setIsModal(false);
-    navigate('/search');
+    navigate("/search");
   };
 
   return (
@@ -138,10 +139,10 @@ const NavBar = () => {
                 }
                 className={({ isActive }) =>
                   isActive ||
-                  (item.id === 5 && location.pathname.startsWith('/mypage')) ||
-                  (item.id === 3 && location.pathname.startsWith('/diary'))
-                    ? 'text-[#B98D6D]'
-                    : 'hover:text-[#B98D6D] transition-colors duration-75'
+                  (item.id === 5 && location.pathname.startsWith("/mypage")) ||
+                  (item.id === 3 && location.pathname.startsWith("/diary"))
+                    ? "text-[#B98D6D]"
+                    : "hover:text-[#B98D6D] transition-colors duration-75"
                 }
                 key={item.id}
               >

@@ -1,20 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
-import Dropdown from './Dropdown';
-import MonthlyCount from './MonthlyCount';
-import { getDiaryNums } from '../../../apis/user';
-import { useState } from 'react';
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import Dropdown from "./Dropdown";
+import MonthlyCount from "./MonthlyCount";
+import { getDiaryNums } from "@apis/userStatic";
+import { useState } from "react";
 
 const DiaryCount = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const formattedDate = format(new Date(selectedYear, 0, 1), 'yyyy-MM-dd');
+  const formattedDate = format(new Date(selectedYear, 0, 1), "yyyy-MM-dd");
 
   const {
     data: diaryNums,
     isError,
     error,
   } = useQuery({
-    queryKey: ['emotion', formattedDate],
+    queryKey: ["emotion", formattedDate],
     queryFn: () => getDiaryNums(formattedDate),
   });
 

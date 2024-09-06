@@ -1,18 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import Footer from '../../components/common/layout/Footer';
-import NavBar from '../../components/common/layout/NavBar';
-import AnalysisSection from '../../components/MainPage/AnalysisSection';
-import CalendarSection from '../../components/MainPage/CalendarSection';
-import IntroduceSection from '../../components/MainPage/IntroduceSection';
-import useUserStore from '../../store/userStore';
-import { getUserInfo } from '../../apis/user';
-import useTemporaryDiaryStore from '../../store/temporaryDiaryStore';
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import Footer from "../../components/common/layout/Footer";
+import NavBar from "../../components/common/layout/NavBar";
+import AnalysisSection from "../../components/MainPage/AnalysisSection";
+import CalendarSection from "../../components/MainPage/CalendarSection";
+import IntroduceSection from "../../components/MainPage/IntroduceSection";
+import useUserStore from "../../store/userStore";
+import { getUserInfo } from "../../apis/user";
+import useTemporaryDiaryStore from "../../store/temporaryDiaryStore";
+import { User } from "@type/User";
 
 const MainPage = () => {
   const { setTemporaryDiary } = useTemporaryDiaryStore();
-  const { isError, data, error } = useQuery({
-    queryKey: ['userInfo'],
+  const { isError, data, error } = useQuery<User>({
+    queryKey: ["userInfo"],
     queryFn: getUserInfo,
   });
 
@@ -33,7 +34,6 @@ const MainPage = () => {
   }
 
   if (isError) {
-    console.error('Error fetching user info:', error);
     return <div>오류 발생: {error.message}</div>;
   }
 

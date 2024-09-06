@@ -21,11 +21,16 @@ import { useEffect, useState } from "react";
 import AlertModal from "../common/layout/AlertModal";
 import { checkTodayDiary } from "@apis/userStatic";
 
-function SampleNextArrow(props) {
-  const { onClick } = props;
+type MouseEventHandler<T = Element> = (event: React.MouseEvent<T>) => void;
+
+interface Props {
+  onClick: MouseEventHandler<HTMLDivElement>;
+}
+
+function SampleNextArrow({ onClick }: Props) {
   return (
     <div
-      className="absolute w-14 h-14  right-4 top-[45%] transform -translate-y-1/2 z-10 cursor-pointer"
+      className="absolute w-14 h-14 right-4 top-[45%] transform -translate-y-1/2 z-10 cursor-pointer"
       onClick={onClick}
     >
       <img src={nextIcon} alt="" className="w-12 h-12" />
@@ -33,8 +38,7 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
-  const { onClick } = props;
+function SamplePrevArrow({ onClick }: Props) {
   return (
     <div
       className="absolute w-14 h-14 left-4 top-[45%] transform -translate-y-1/2 z-10 cursor-pointer"
@@ -46,7 +50,7 @@ function SamplePrevArrow(props) {
 }
 
 const IntroduceSection = () => {
-  const [isModal, setIsModal] = useState(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const settings = {
     dots: true, // 점 표시 여부
@@ -56,9 +60,9 @@ const IntroduceSection = () => {
     slidesToScroll: 1, // 한 번에 스크롤할 슬라이드 수
     autoplay: true, // 자동 재생 여부
     autoplaySpeed: 6000, // 자동 재생 속도 (6초)
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    appendDots: (dots) => (
+    nextArrow: <SampleNextArrow onClick={() => {}} />,
+    prevArrow: <SamplePrevArrow onClick={() => {}} />,
+    appendDots: (dots: React.ReactNode) => (
       <div
         style={{
           width: "100%",
@@ -95,7 +99,7 @@ const IntroduceSection = () => {
   return (
     <div>
       <Slider {...settings}>
-        <Link>
+        <Link to="#">
           {/* <div className="relative">
             <img
               src={banner_1}
@@ -121,7 +125,7 @@ const IntroduceSection = () => {
           </div> */}
           <img src={banner_1} alt="Banner 1" className="w-full" />
         </Link>
-        <Link onClick={handleBanner}>
+        <Link to="#" onClick={handleBanner}>
           <div className="relative">
             <img
               src={banner_2}
@@ -141,7 +145,7 @@ const IntroduceSection = () => {
           </div>
           <div className="absolute bottom-0 z-30 w-full h-[10px] bg-[#E8DBCF]"></div>
         </Link>
-        <Link onClick={handleBanner}>
+        <Link to="#" onClick={handleBanner}>
           <img src={banner_3} alt="Banner 3" className="w-full" />
         </Link>
         <Link to="/search">

@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import useCalendarStore from '../../../store/calendarStore';
-import { postSummary } from '../../../apis/main';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { postSummary } from "@apis/main";
+import { DiarySummaryData } from "@type/Diary";
+import useCalendarStore from "@store/calendarStore";
 
 const DiarySummary = () => {
   const { selectedDate } = useCalendarStore();
-  const [diarySummary, setDiarySummary] = useState({
-    diaryTitle: '제목',
-    diarySummary: '일기 한 줄 요약',
-    diaryId: null,
+  const [diarySummary, setDiarySummary] = useState<DiarySummaryData>({
+    diaryTitle: "제목",
+    diarySummary: "일기 한 줄 요약",
+    diaryId: 0,
   });
 
   useEffect(() => {
@@ -18,7 +19,10 @@ const DiarySummary = () => {
         const data = await postSummary({ calendarDay: selectedDate });
         setDiarySummary(data);
       } catch (error) {
-        console.error('Failed to fetch diary summary:', error.message);
+        console.error(
+          "Failed to fetch diary summary:",
+          (error as Error).message
+        );
       }
     };
     fetchSummary();

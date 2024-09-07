@@ -1,7 +1,12 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const useCalendarClickStore = create((set) => ({
-  calendarClick: 'false',
+interface CalendarClickState {
+  calendarClick: boolean;
+  setCalendarClick: (newState: boolean) => void;
+}
+
+const useCalendarClickStore = create<CalendarClickState>((set) => ({
+  calendarClick: false, 
   setCalendarClick: (newState) => set({ calendarClick: newState }),
 }));
 

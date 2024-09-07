@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 import {
   addMonths,
   eachDayOfInterval,
@@ -9,12 +9,26 @@ import {
   startOfMonth,
   startOfWeek,
   subMonths,
-} from 'date-fns';
-import { postCalendar } from '../apis/main';
+} from "date-fns";
+import { postCalendar } from "@apis/main";
+import { BasicDiary } from "@type/Diary";
+import { DayInfo } from "@type/Calendar";
 
-const useCalendarStore = create((set) => ({
+interface CalendarState {
+  currentDate: Date; 
+  selectedDate: string; 
+  diaryList: BasicDiary[]; 
+  setDate: (newDate: Date) => void; 
+  selectDate: (date: string) => void;
+  fetchDiaryList: () => Promise<void>; 
+  handlePrevMonth: () => Promise<void>; 
+  handleNextMonth: () => Promise<void>; 
+  daysInMonth: (currentDate: Date) => DayInfo[]; 
+}
+
+const useCalendarStore = create<CalendarState>((set) => ({
   currentDate: new Date(),
-  selectedDate: format(new Date(), 'yyyy-MM-dd'),
+  selectedDate: format(new Date(), "yyyy-MM-dd"),
   diaryList: [], // 일기 목록
 
   setDate: (newDate) => set({ currentDate: newDate }),
@@ -22,20 +36,19 @@ const useCalendarStore = create((set) => ({
 
   fetchDiaryList: async () => {
     const currentDate = useCalendarStore.getState().currentDate;
-    const month = format(currentDate, 'yyyy-MM');
+    const month = format(currentDate, "yyyy-MM");
     try {
       const data = await postCalendar({ calendarMonth: month });
-
       const diaryListWithoutTime = data.diaryResCalendarMonthDTOList.map(
-        (diary) => ({
+        (diary: BasicDiary) => ({
           ...diary,
-          diaryDate: format(new Date(diary.diaryDate), 'yyyy-MM-dd'),
-        }),
+          diaryDate: format(new Date(diary.diaryDate), "yyyy-MM-dd"),
+        })
       );
 
       set({ diaryList: diaryListWithoutTime });
     } catch (error) {
-      console.error('Failed to fetch diary list:', error.message);
+      console.error("Failed to fetch diary list:", (error as Error).message);
     }
   },
 
@@ -69,9 +82,9 @@ const useCalendarStore = create((set) => ({
     });
 
     return days.map((day) => ({
-      date: format(day, 'yyyy-MM-dd'),
-      month: format(day, 'MM'),
-      day: format(day, 'dd'),
+      date: format(day, "yyyy-MM-dd"),
+      month: format(day, "MM"),
+      day: format(day, "dd"),
       dayIndexOfWeek: getDay(day),
     }));
   },

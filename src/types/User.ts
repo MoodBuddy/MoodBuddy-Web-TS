@@ -1,4 +1,4 @@
-import { EmotionFullName } from "@constants/EmotionList";
+import { diaryEmotion } from "@constants/EmotionList";
 
 export interface User {
   nickname: string;
@@ -6,7 +6,7 @@ export interface User {
   profileComment: string;
   profileImgURL: string;
   userCurDiaryNums: number;
-  diaryEmotion: EmotionFullName;
+  diaryEmotion: diaryEmotion;
   maxEmotionNum: number;
 }
 

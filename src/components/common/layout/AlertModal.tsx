@@ -1,8 +1,14 @@
-import Button from '../button/Button';
-import happyQuddy from '@assets/happyQuddy.svg';
-import close from '../../../../public/icon/close.svg';
+import Button from "../button/Button";
+import happyQuddy from "@assets/happyQuddy.svg";
+import close from "../../../../public/icon/close.svg";
+import { PropsWithChildren } from "react";
 
-const AlertModal = ({ handleButtonClick, setIsModal }) => {
+interface AlertModalProps extends PropsWithChildren {
+  handleButtonClick: () => void;
+  setIsModal: (value: boolean) => void;
+}
+
+const AlertModal = ({ handleButtonClick, setIsModal }: AlertModalProps) => {
   const onClose = () => {
     setIsModal(false);
   };

@@ -39,10 +39,19 @@ export const getquddyTI = async (): Promise<QuiddyTIResponse> => {
   }
 };
 
-export const checkTodayDiary = async (): Promise<boolean> => {
+// /api/v1/member/checkTodayDiary API만 받아오는 데이터형식이 다르기 때문에 따로 만들어줌
+export const checkTodayDiary = async (): Promise<{
+  kakaoId: number;
+  checkTodayDairy: boolean;
+}> => {
   try {
-    const data = await get<boolean>("/api/v1/member/checkTodayDiary");
-    return data.data;
+    const response = await get<{
+      code: number;
+      data: { kakaoId: number; checkTodayDairy: boolean };
+      message: string;
+      status: string;
+    }>("/api/v1/member/checkTodayDiary");
+    return response.data; 
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }

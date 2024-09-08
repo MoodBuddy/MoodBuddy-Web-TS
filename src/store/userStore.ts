@@ -1,23 +1,20 @@
-import { create } from 'zustand';
+import { User } from "@type/User";
+import { create } from "zustand";
 
-const useUserStore = create((set) => ({
-  nickname: null,
-  userBirth: null,
-  profileComment: null,
-  profileImgURL: null,
+const useUserStore = create<
+  Partial<User> & { setUserInfo: (userInfo: User) => void }
+>((set) => ({
+  nickname: "",
+  userBirth: "",
+  profileComment: "",
+  profileImgURL: "",
   userCurDiaryNums: 0,
-  diaryEmotion: null,
+  diaryEmotion: "",
   maxEmotionNum: 0,
 
-  setUserInfo: (userInfo) =>
-    set((state) => ({
-      nickname: userInfo.nickname,
-      userBirth: userInfo.userBirth,
-      profileComment: userInfo.profileComment,
-      profileImgURL: userInfo.profileImgURL,
-      userCurDiaryNums: userInfo.userCurDiaryNums,
-      diaryEmotion: userInfo.diaryEmotion,
-      maxEmotionNum: userInfo.maxEmotionNum,
+  setUserInfo: (userInfo: User) =>
+    set(() => ({
+      ...userInfo,
     })),
 }));
 

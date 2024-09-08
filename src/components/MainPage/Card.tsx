@@ -1,4 +1,4 @@
-const Card = ({ children }) => {
+const Card = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-[382px] h-[531px] rounded-[29px] bg-[#F4EDE7] border-solid border-[5px] border-black p-4">
       <div className="flex gap-2 justify-end mr-4">

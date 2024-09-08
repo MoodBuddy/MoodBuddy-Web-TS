@@ -1,4 +1,4 @@
-import { EmotionFullName } from "@constants/EmotionList";
+import { diaryEmotion } from "@constants/EmotionList";
 
 interface DiaryNums {
   month: string;
@@ -8,7 +8,7 @@ interface DiaryNums {
 type DiaryNumsResponse = DiaryNums[];
 
 interface EmotionNumEntry {
-  diaryEmotion: EmotionFullName;
+  diaryEmotion: diaryEmotion;
   nums: number;
 }
 
@@ -33,7 +33,7 @@ interface QuiddyTIResponse {
 }
 
 interface EmotionStatic {
-  diaryEmotion: EmotionFullName;
+  diaryEmotion: diaryEmotion;
   nums: number;
 }
 

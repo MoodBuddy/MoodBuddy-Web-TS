@@ -1,3 +1,12 @@
+export type diaryEmotion =
+  | "Happiness"
+  | "Anger"
+  | "Disgust"
+  | "Fear"
+  | "Neutral"
+  | "Sadness"
+  | "Surprise";
+
 export const emotions = [
   {
     fullName: "Happiness",
@@ -49,5 +58,3 @@ export const emotions = [
     color: "#E3C778",
   },
 ];
-
-export type EmotionFullName = (typeof emotions)[number]["fullName"];

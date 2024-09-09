@@ -1,18 +1,28 @@
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 import client from "./client";
 
-export const get = async <T>(url: string): Promise<T> => {
+// GET 요청
+export const get = async <T>(
+  url: string,
+  config?: AxiosRequestConfig
+): Promise<AxiosResponse<T>> => {
   try {
-    const res = await client.get(url);
-    return res.data;
+    const response = await client.get<T>(url, config);
+    return response;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
-  
-export const post = async <T>(url: string, data?: any): Promise<T> => {
+
+// POST 요청
+export const post = async <T>(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+): Promise<AxiosResponse<T>> => {
   try {
-    const res = await client.post(url, data);
-    return res.data;
+    const response = await client.post<T>(url, data, config);
+    return response;
   } catch (error) {
     throw new Error("데이터 전송에 실패하였습니다.");
   }

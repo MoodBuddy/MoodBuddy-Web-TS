@@ -9,7 +9,7 @@ export const postShortWordToNextMonth = async (
   comment: Comment
 ): Promise<CommentResponse> => {
   try {
-    const res = await post<CommentResponse>(
+    const res = await post<Comment>(
       END_POINT.USER.POST_MONTH_COMMENT,
       comment
     );
@@ -23,7 +23,7 @@ export const updateShortWordToNextMonth = async (
   comment: Comment
 ): Promise<CommentResponse> => {
   try {
-    const res = await post<CommentResponse>(
+    const res = await post<Comment>(
       END_POINT.USER.POST_MONTH_COMMENT_UPDATE,
       comment
     );

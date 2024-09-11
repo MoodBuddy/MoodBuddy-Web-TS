@@ -1,3 +1,4 @@
+import { BaseResponse } from "@type/Api";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import client from "./client";
 
@@ -5,9 +6,9 @@ import client from "./client";
 export const get = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<T>> => {
+): Promise<AxiosResponse<BaseResponse<T>>> => {
   try {
-    const response = await client.get<T>(url, config);
+    const response = await client.get(url, config);
     return response;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
@@ -19,9 +20,9 @@ export const post = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<T>> => {
+): Promise<AxiosResponse<BaseResponse<T>>> => {
   try {
-    const response = await client.post<T>(url, data, config);
+    const response = await client.post(url, data, config);
     return response;
   } catch (error) {
     throw new Error("데이터 전송에 실패하였습니다.");

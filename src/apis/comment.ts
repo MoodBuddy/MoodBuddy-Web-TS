@@ -1,21 +1,33 @@
 import { post } from "./apiUtils";
+import { END_POINT } from "@constants/api";
+import { BaseResponse } from "@type/Api";
+import { Comment } from "@type/Comment";
 
-export const postShortWordToNextMonth = async (comment) => {
+type CommentResponse = BaseResponse<Comment>;
+
+export const postShortWordToNextMonth = async (
+  comment: Comment
+): Promise<CommentResponse> => {
   try {
-    const data = await post("/api/v1/member/main/month-comment", comment);
-    return data;
+    const res = await post<Comment>(
+      END_POINT.USER.POST_MONTH_COMMENT,
+      comment
+    );
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const updateShortWordToNextMonth = async (comment) => {
+export const updateShortWordToNextMonth = async (
+  comment: Comment
+): Promise<CommentResponse> => {
   try {
-    const data = await post(
-      "/api/v1/member/main/month-comment-update",
+    const res = await post<Comment>(
+      END_POINT.USER.POST_MONTH_COMMENT_UPDATE,
       comment
     );
-    return data;
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }

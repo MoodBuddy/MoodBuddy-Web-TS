@@ -20,3 +20,8 @@ export interface Profile {
   gender: boolean;
   birthday: string;
 }
+
+export interface UserDiary {
+  kakaoId: number;
+  checkTodayDiary: boolean;
+}

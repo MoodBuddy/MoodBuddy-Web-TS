@@ -26,3 +26,7 @@ export type DiarySummaryData = Pick<
   DetailedDiary,
   "diaryId" | "diaryTitle" | "diarySummary"
 >;
+
+export type BookMark = {
+  bookmarked: boolean;
+};

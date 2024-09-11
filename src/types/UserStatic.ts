@@ -5,19 +5,15 @@ interface DiaryNums {
   nums: number;
 }
 
-type DiaryNumsResponse = DiaryNums[];
-
-interface EmotionNumEntry {
+interface EmotionNums {
   diaryEmotion: diaryEmotion;
   nums: number;
 }
 
-type EmotionNumsResponse = EmotionNumEntry[];
-
 // 임시로 OTHER_TYPE으로 설정
 type QuiddyTIType = "PEH" | "OTHER_TYPE";
 
-interface QuiddyTIResponse {
+interface QuiddyTI {
   happinessCount: number;
   angerCount: number;
   disgustCount: number;
@@ -37,15 +33,10 @@ interface EmotionStatic {
   nums: number;
 }
 
-interface MonthStaticResponse {
+interface MonthStatic {
   emotionStaticDtoList: EmotionStatic[];
   monthComment: string;
   commentCheck: boolean;
 }
 
-export type {
-  DiaryNumsResponse,
-  EmotionNumsResponse,
-  QuiddyTIResponse,
-  MonthStaticResponse,
-};
+export type { DiaryNums, EmotionNums, QuiddyTI, MonthStatic };

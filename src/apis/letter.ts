@@ -1,48 +1,60 @@
-import client from './client';
+import { get, post } from "./apiUtils";
+import { BaseResponse } from "@type/Api";
+import { END_POINT } from "@constants/api";
+import {
+  BaseLetter,
+  CreateLetterRequest,
+  Letter,
+  LetterDetail,
+} from "@type/Letter";
 
-const get = async (url) => {
-  const res = await client.get(url);
-  return res?.data;
-};
+type LetterResponse = BaseResponse<Letter>;
+type LetterDetailsResponse = BaseResponse<LetterDetail>;
+type LetterPostResponse = BaseResponse<BaseLetter>;
 
-const post = async (url, data) => {
-  const res = await client.post(url, data);
-  return res?.data;
-};
-
-export const getLetter = async () => {
+export const getLetter = async (): Promise<LetterResponse> => {
   try {
-    const data = await get(`/api/v1/member/letter`);
-    return data;
+    const res = await get<Letter>(END_POINT.LETTER.GET_LETTER);
+    return res.data;
   } catch (error) {
-    throw new Error('데이터 불러오기에 실패하였습니다.');
+    throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const getLetterDetails = async (letterId) => {
+export const getLetterDetails = async (
+  letterId: number
+): Promise<LetterDetailsResponse> => {
   try {
-    const data = await get(`/api/v1/member/letter/details/${letterId}`);
-    return data;
+    const res = await get<LetterDetail>(
+      END_POINT.LETTER.GET_LETTER_DETAILS(letterId)
+    );
+    return res.data;
   } catch (error) {
-    throw new Error('데이터 불러오기에 실패하였습니다.');
+    throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const postLetter = async (letterData) => {
+export const postLetter = async (
+  letterData: CreateLetterRequest
+): Promise<LetterPostResponse> => {
   try {
-    const data = await post(`/api/v1/member/letter/write`, letterData);
-    console.log(data);
-    return data;
+    const res = await post<BaseLetter>(
+      END_POINT.LETTER.POST_LETTER,
+      letterData
+    );
+    return res.data;
   } catch (error) {
-    throw new Error('데이터 불러오기에 실패하였습니다.');
+    throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const postAlarm = async (alarm) => {
+export const postAlarm = async (
+  alarm: boolean
+): Promise<LetterPostResponse> => {
   try {
-    const data = await post(`/api/v1/member/letter/alarm`, alarm);
-    return data;
+    const res = await post<BaseLetter>(END_POINT.LETTER.POST_ALARM, alarm);
+    return res.data;
   } catch (error) {
-    throw new Error('데이터 불러오기에 실패하였습니다.');
+    throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };

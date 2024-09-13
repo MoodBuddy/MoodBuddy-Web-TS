@@ -1,3 +1,8 @@
 export interface UserAuth {
-  kakaoId: number;
+  kakaoId: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
 }

@@ -4,7 +4,12 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import dayjs from "dayjs";
-import { parseJwtPayload } from "./utils";
+import {
+  getAccessToken,
+  getRefreshToken,
+  parseJwtPayload,
+  removeTokens,
+} from "./utils";
 import { API_BASE_URL } from "@constants/api";
 
 const client = axios.create({
@@ -25,9 +30,8 @@ client.interceptors.response.use(
 // 요청 인터셉터 설정
 client.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   try {
-    const sessionData = sessionStorage.getItem("session");
-    const session = sessionData ? JSON.parse(sessionData) : null;
-    const token = session?.token;
+    const token = getAccessToken();
+    const refreshToken = getRefreshToken();
 
     if (!config.headers) {
       config.headers = {} as AxiosRequestHeaders;
@@ -40,24 +44,28 @@ client.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
       const diffMinutes = expirationTime.diff(currentTime, "minute");
 
       if (diffMinutes <= 0) {
-        const iData = localStorage.getItem("i");
-        const i = iData ? JSON.parse(iData) : null;
+        // 액세스 토큰 만료
+        if (refreshToken) {
+          const refreshPayload = parseJwtPayload(refreshToken);
+          const refreshExpirationTime = dayjs.unix(refreshPayload.exp);
+          const refreshDiffMinutes = refreshExpirationTime.diff(
+            currentTime,
+            "minute"
+          );
 
-        if (i) {
-          const iPayload = parseJwtPayload(i);
-          const iExpirationTime = dayjs.unix(iPayload.exp);
-          const iDiffMinutes = iExpirationTime.diff(currentTime, "minute");
-
-          if (iDiffMinutes <= 0) {
-            localStorage.removeItem("i");
+          if (refreshDiffMinutes <= 0) {
+            // 리프레시 토큰도 만료됨
+            removeTokens();
             window.location.href = "/";
-            return Promise.reject(new Error("Refresh token expired"));
+            return Promise.reject(new Error("Tokens expired"));
           }
+          // 해당 부분에 토큰 갱신 로직 추가
+        } else {
+          // 리프레시 토큰 없음
+          removeTokens();
+          window.location.href = "/";
+          return Promise.reject(new Error("Session expired"));
         }
-
-        sessionStorage.removeItem("session");
-        window.location.href = "/";
-        return Promise.reject(new Error("Session token expired"));
       }
 
       config.headers.Authorization = `Bearer ${token}`;
@@ -65,7 +73,6 @@ client.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   } catch (e) {
     return Promise.reject(e);
   }
-
   return config;
 });
 

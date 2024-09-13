@@ -1,8 +1,15 @@
-import { create } from 'zustand';
+import { getAccessToken } from "@apis/utils";
+import { create } from "zustand";
 
-const useAuthStore = create((set) => ({
-  isAuthenticated: !!sessionStorage.getItem('session'), // 초기 상태를 sessionStorage에 따라 설정
-  setAuthenticated: (authStatus) => set({ isAuthenticated: authStatus }),
+interface AuthState {
+  isAuthenticated: boolean;
+  setAuthenticated: (authStatus: boolean) => void;
+}
+
+const useAuthStore = create<AuthState>((set) => ({
+  isAuthenticated: !!getAccessToken(),
+  setAuthenticated: (authStatus: boolean) =>
+    set({ isAuthenticated: authStatus }),
 }));
 
 export default useAuthStore;

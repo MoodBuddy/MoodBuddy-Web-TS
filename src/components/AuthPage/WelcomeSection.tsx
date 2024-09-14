@@ -33,6 +33,12 @@ const WelcomeSection = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[#EDE2DA]">
       <div className="flex flex-col items-center gap-2">
@@ -72,6 +78,7 @@ const WelcomeSection = () => {
             className="border-[1px] border-black p-[10px] w-[390px] h-[40px] rounded-[7px]"
             value={kakaoId}
             onChange={(e) => setKakaoId(e.target.value)}
+            onKeyDown={handleKeyDown} 
             placeholder="아이디를 입력하세요"
           />
         </div>

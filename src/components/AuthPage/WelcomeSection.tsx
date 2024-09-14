@@ -1,47 +1,41 @@
-import { useState } from 'react';
-import happyQuddy from '@assets/happyQuddy.svg';
-import calmQuddy from '@assets/calmQuddy.svg';
-import surpriseQuddy from '@assets/surpriseQuddy.svg';
-import angryQuddy from '@assets/angryQuddy.svg';
-import gloomyQuddy from '@assets/gloomyQuddy.svg';
-import Button from '../common/button/Button';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import useAuthStore from '../../store/authStore';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import happyQuddy from "@assets/happyQuddy.svg";
+import calmQuddy from "@assets/calmQuddy.svg";
+import surpriseQuddy from "@assets/surpriseQuddy.svg";
+import angryQuddy from "@assets/angryQuddy.svg";
+import gloomyQuddy from "@assets/gloomyQuddy.svg";
+import Button from "../common/button/Button";
+import useAuthStore from "@store/authStore";
+import { postTestLogin } from "@apis/auth";
+import { setTokens } from "@apis/utils";
 
 const WelcomeSection = () => {
-  const [kakaoId, setKakaoId] = useState('');
-  const [error, setError] = useState(null);
+  const [kakaoId, setKakaoId] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { setAuthenticated } = useAuthStore();
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/member/test/login`,
-        { kakaoId },
-        {
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-        },
-      );
-
-      const { accessToken, refreshToken } = res.data.data;
+      const res = await postTestLogin({ kakaoId });
+      const { accessToken, refreshToken } = res.data;
 
       if (accessToken && refreshToken) {
-        sessionStorage.setItem(
-          'session',
-          JSON.stringify({ token: accessToken }),
-        );
-        sessionStorage.setItem('i', refreshToken);
+        setTokens(accessToken, refreshToken); // 토큰 저장
         setAuthenticated(true); // 인증 상태 업데이트
-        navigate('/home');
+        navigate("/home");
       } else {
-        throw new Error('로그인에 실패하였습니다.');
+        throw new Error("로그인에 실패하였습니다.");
       }
-    } catch (error) {
-      setError(error.response ? error.response.data.message : error.message);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleLogin();
     }
   };
 
@@ -84,6 +78,7 @@ const WelcomeSection = () => {
             className="border-[1px] border-black p-[10px] w-[390px] h-[40px] rounded-[7px]"
             value={kakaoId}
             onChange={(e) => setKakaoId(e.target.value)}
+            onKeyDown={handleKeyDown} 
             placeholder="아이디를 입력하세요"
           />
         </div>

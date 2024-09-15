@@ -1,6 +1,11 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const useTemporaryDiaryStore = create((set) => ({
+interface TemporaryDiaryState {
+  temporaryDiary: boolean;
+  setTemporaryDiary: (newState: boolean) => void;
+}
+
+const useTemporaryDiaryStore = create<TemporaryDiaryState>((set) => ({
   temporaryDiary: false,
   setTemporaryDiary: (newState: boolean) => set({ temporaryDiary: newState }),
 }));

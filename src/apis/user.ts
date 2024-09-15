@@ -11,7 +11,6 @@ type ProfileEditResponse = BaseResponse<Profile>;
 export const getUserInfo = async (): Promise<UserResponse> => {
   try {
     const res = await get<User>(END_POINT.USER.GET_MAIN);
-    console.log(res);
     return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");

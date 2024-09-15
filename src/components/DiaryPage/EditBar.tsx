@@ -1,6 +1,6 @@
 import Button from '../common/button/Button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteDiary, getFindAllByEmotion, getFindOne } from '../../apis/diary';
+import { deleteDiary, getFindOne } from '../../apis/diary';
 import { useNavigate, useParams } from 'react-router-dom';
 import { bookMarkToggle } from '../../apis/bookMark';
 import { useEffect, useState } from 'react';
@@ -41,7 +41,6 @@ const EditBar = ({ diaryId }) => {
     const diaryId = async () => {
       try {
         const res = await getOriginalDiary(id);
-        console.log(res);
         if (res) {
           setIsBookMark(res.diaryBookMarkCheck);
         }

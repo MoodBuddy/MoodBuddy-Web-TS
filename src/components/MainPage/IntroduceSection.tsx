@@ -80,7 +80,6 @@ const IntroduceSection = () => {
   const handleBanner = async () => {
     try {
       const res = await checkTodayDiary();
-      console.log(res);
       if (!res.checkTodayDairy) {
         setIsModal(!isModal);
       } else {

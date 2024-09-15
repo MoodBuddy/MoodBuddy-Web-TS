@@ -170,7 +170,11 @@ const TopBar: React.FC<TopBarProps> = ({ selectedDate, setTemplateOn }) => {
       formData.append("diaryTitle", title);
       formData.append(
         "diaryDate",
-        selectedDate ? selectedDate : todayUTC.slice(0, -14)
+        selectedDate
+          ? typeof selectedDate === "string"
+            ? selectedDate
+            : selectedDate.toString()
+          : todayUTC.slice(0, -14)
       );
       formData.append("diaryContent", content);
       formData.append("diaryWeather", selectedOption);
@@ -179,7 +183,7 @@ const TopBar: React.FC<TopBarProps> = ({ selectedDate, setTemplateOn }) => {
       }
       formData.append("diaryFont", diaryFont);
       formData.append("diaryFontSize", diaryTextSize);
-      console.log(...formData);
+      console.log(formData);
       const res = await SaveDraftDiary(formData);
       console.log(res.data.data.diaryId);
       const newDraftId = res.data.data.diaryId;
@@ -263,7 +267,7 @@ const TopBar: React.FC<TopBarProps> = ({ selectedDate, setTemplateOn }) => {
                   onClick={isTemporaryStorageModal}
                   className=" font-medium text-[25px] ml-[10px]"
                 >
-                  {draftDiaryNum}
+                  {draftDiaryNum.toString()}
                 </div>
               </button>
             )}

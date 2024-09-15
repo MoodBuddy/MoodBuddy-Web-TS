@@ -1,7 +1,11 @@
-import { create } from 'zustand';
-
-const useDiaryContentStore = create((set) => ({
-  content: '',
+import { create } from "zustand";
+type DiaryContentStore = {
+  content: string;
+  setContent: (newContent: string) => void;
+  addTemplate: (newTemplate: string) => void;
+};
+const useDiaryContentStore = create<DiaryContentStore>((set) => ({
+  content: "",
   setContent: (newContent) => set({ content: newContent }),
   addTemplate: (newTemplate) =>
     set((state) => ({

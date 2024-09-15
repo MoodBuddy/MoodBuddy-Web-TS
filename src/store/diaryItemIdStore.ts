@@ -1,7 +1,10 @@
-import { create } from 'zustand';
-
-const useDiaryItemIdStore = create((set) => ({
-  diaryItemId: '',
+import { create } from "zustand";
+type DiaryItemIdStore = {
+  diaryItemId: string;
+  setDiaryItemId: (newDiaryItemId: string) => void;
+};
+const useDiaryItemIdStore = create<DiaryItemIdStore>((set) => ({
+  diaryItemId: "",
   setDiaryItemId: (newDiaryItemId) => {
     set({ diaryItemId: newDiaryItemId });
   },

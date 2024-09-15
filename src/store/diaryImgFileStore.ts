@@ -6,7 +6,7 @@ type DiaryImgFileStore = {
   addImageFile: (file: File) => void;
   removeImageFile: (index: number) => void;
 };
-const useDiaryImgFileStore = create((set) => ({
+const useDiaryImgFileStore = create<DiaryImgFileStore>((set) => ({
   imageFiles: [], // 파일 배열로 상태를 초기화
   setImageFiles: (newImgFiles) => {
     set(() => {

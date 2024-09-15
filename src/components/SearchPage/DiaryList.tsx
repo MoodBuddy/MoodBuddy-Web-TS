@@ -5,7 +5,7 @@ import {
   getFindAll,
   getFindAllByEmotion,
   getFindAllByFilter,
-} from "../../apis/diary";
+} from "../../apis/searchDiary";
 import { getBookMarkFindAll } from "../../apis/bookMark";
 import { weatherList } from "../../constants/WeatherList";
 import useSearchStore from "../../store/searchStore";

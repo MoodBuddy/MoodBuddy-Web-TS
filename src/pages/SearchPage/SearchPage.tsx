@@ -1,8 +1,8 @@
-import Footer from '../../components/common/layout/Footer';
-import NavBar from '../../components/common/layout/NavBar';
-import SearchGuide from '../../components/SearchPage/SearchGuide';
-import SearchBar from '../../components/SearchPage/SearchSection';
-import styles from '@styles/check.module.css';
+import Footer from "../../components/common/layout/Footer";
+import NavBar from "../../components/common/layout/NavBar";
+import SearchGuide from "../../components/SearchPage/SearchGuide";
+import SearchBar from "../../components/SearchPage/SearchSection";
+import styles from "@styles/check.module.css";
 
 const SearchPage = () => {
   return (

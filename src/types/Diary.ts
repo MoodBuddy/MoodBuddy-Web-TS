@@ -16,6 +16,16 @@ export interface DetailedDiary {
   diaryFont: "MEETME" | "INTER";
   diaryFontSize: "PX24" | "PX28" | "PX30";
 }
+export type DiaryEmotion = {
+  emotion:
+    | "HAPPINESS"
+    | "ANGER"
+    | "DISGUST"
+    | "FEAR"
+    | "NEUTRAL"
+    | "SADNESS"
+    | "SURPRISE";
+};
 
 export type Topic = "DAILY" | "GROWTH" | "EMOTION" | "TRAVEL";
 

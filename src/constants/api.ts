@@ -25,7 +25,7 @@ export const END_POINT = {
     POST_UPDATE: `/api/v1/member/diary/update`, // 일기 수정
     POST_SAVE: `/api/v1/member/diary/save`, // 일기 작성
     POST_DRAFT_SAVE: `/api/v1/member/diary/draftSave`, // 일기 임시 저장
-    POST_DESCRIPTION: `/api/v1/member/diary/description`, // 일기 설명 저장
+    POST_DESCRIPTION: `/api/v1/member/diary/description`, // 일기 감정 분석
     GET_FIND_ONE: (diaryId: number) =>
       `/api/v1/member/diary/findOne/${diaryId}`, // 일기 하나 조회
     GET_FIND_ALL: `/api/v1/member/diary/findAllPageable?page=0&size=100`, // 일기 전체 조회

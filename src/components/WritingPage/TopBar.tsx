@@ -1,37 +1,43 @@
-import img from '@assets/img.svg';
-import save from '../../../public/icon/save.svg';
-import temporary from '@assets/temporaryStorage.svg';
-import showTemplate from '@assets/showTemplate.svg';
-import { useEffect, useState } from 'react';
-import TemporaryStorage from './TemporaryStorage.jsx';
-import GotoAnalysis from './GotoAnalysis.jsx';
-import useDiaryImgStore from '../../store/diaryImgStore.js';
-import useDiaryImgFileStore from '../../store/diaryImgFileStore.js';
-import useTitleStore from '../../store/titleStore.js';
-import useDiaryContentStore from '../../store/diaryContentStore.js';
-import useweatherStore from '../../store/weatherStore.js';
+import img from "@assets/img.svg";
+import save from "../../../public/icon/save.svg";
+import temporary from "@assets/temporaryStorage.svg";
+import showTemplate from "@assets/showTemplate.svg";
+import { useEffect, useState, ChangeEvent } from "react";
+import TemporaryStorage from "./TemporaryStorage.jsx";
+import GotoAnalysis from "./GotoAnalysis.jsx";
+import useDiaryImgStore from "../../store/diaryImgStore.js";
+import useDiaryImgFileStore from "../../store/diaryImgFileStore.js";
+import useTitleStore from "../../store/titleStore.js";
+import useDiaryContentStore from "../../store/diaryContentStore.js";
+import useweatherStore from "../../store/weatherStore.js";
 import {
   getFindDraftAll,
   SaveDraftDiary,
   updateDiaryOne,
-} from '../../apis/diary.js';
-import useDraftNumStore from '../../store/draftNumStore.js';
-import useDraftListStore from '../../store/draftListStore.js';
-import useUpdateDiaryStore from '../../store/updateDiaryStore.js';
-import useDiaryItemIdStore from '../../store/diaryItemIdStore.js';
-import { useNavigate } from 'react-router-dom';
-import useTemporaryDiaryStore from '../../store/temporaryDiaryStore.js';
-import useDiaryDateStore from '../../store/diaryDateStore.js';
-import useDiaryKeepImgUrlStore from '../../store/diaryKeepImgUrlStore.js';
-import SaveModal from './SaveModal.jsx';
-import TemporaryModal from './TemporaryModal.jsx';
-import useFontStore from '../../store/fontStore.js';
-import useTextSizeStore from '../../store/textSizeStore.js';
+} from "../../apis/diary.js";
+import useDraftNumStore from "../../store/draftNumStore.js";
+import useDraftListStore from "../../store/draftListStore.js";
+import useUpdateDiaryStore from "../../store/updateDiaryStore.js";
+import useDiaryItemIdStore from "../../store/diaryItemIdStore.js";
+import { useNavigate } from "react-router-dom";
+import useTemporaryDiaryStore from "../../store/temporaryDiaryStore.js";
+import useDiaryDateStore from "../../store/diaryDateStore.js";
+import useDiaryKeepImgUrlStore from "../../store/diaryKeepImgUrlStore.js";
+import SaveModal from "./SaveModal.jsx";
+import TemporaryModal from "./TemporaryModal.jsx";
+import useFontStore from "../../store/fontStore.js";
+import useTextSizeStore from "../../store/textSizeStore.js";
 
-const TopBar = ({ selectedDate, setTemplateOn }) => {
-  const [temporaryStorageModal, setTemporaryStorageModal] = useState(false);
+interface TopBarProps {
+  selectedDate: String | null;
+  setTemplateOn: () => void;
+}
+
+const TopBar: React.FC<TopBarProps> = ({ selectedDate, setTemplateOn }) => {
+  const [temporaryStorageModal, setTemporaryStorageModal] =
+    useState<boolean>(false);
   const [gotoAnalysisEmotionModal, setGotoAnalysisEmotionModal] =
-    useState(false);
+    useState<boolean>(false);
   const { diaryImg, setDiaryImg } = useDiaryImgStore();
   const { imageFiles, addImageFile } = useDiaryImgFileStore();
   const { title } = useTitleStore();
@@ -46,13 +52,13 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
   const { diaryKeepImg } = useDiaryKeepImgUrlStore();
   const { font } = useFontStore();
   const { textSize } = useTextSizeStore();
-  const [isModal, setIsModal] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [message, setMessage] = useState('');
-  const [diaryFont, setDiaryFont] = useState('');
-  const [diaryTextSize, setDiaryTextSize] = useState('');
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [diaryFont, setDiaryFont] = useState<string>("");
+  const [diaryTextSize, setDiaryTextSize] = useState<string>("");
 
-  const [isTemporaryModal, setIsTemporaryModal] = useState(false);
+  const [isTemporaryModal, setIsTemporaryModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const today = new Date();
@@ -69,18 +75,18 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
   useEffect(() => {
     console.log(font);
     console.log(textSize);
-    if (font === 'meetme') {
-      setDiaryFont('MEETME');
+    if (font === "meetme") {
+      setDiaryFont("MEETME");
     } else {
-      setDiaryFont('INTER');
+      setDiaryFont("INTER");
     }
-    if (textSize === '24px') {
-      setDiaryTextSize('PX24');
+    if (textSize === "24px") {
+      setDiaryTextSize("PX24");
     } else {
-      if (textSize === '28px') {
-        setDiaryTextSize('PX28');
+      if (textSize === "28px") {
+        setDiaryTextSize("PX28");
       } else {
-        setDiaryTextSize('PX30');
+        setDiaryTextSize("PX30");
       }
     }
 
@@ -88,20 +94,23 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
     console.log(diaryTextSize);
   }, [font, textSize]);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
     console.log(e.target.files);
+    if (!files) return;
 
-    const newDiaryImgs = [];
+    const newDiaryImgs: string[] = [];
 
-    files.forEach((file) => {
+    Array.from(files).forEach((file) => {
       addImageFile(file);
       const reader = new FileReader();
       reader.onload = (event) => {
-        newDiaryImgs.push(event.target.result);
-        if (newDiaryImgs.length === files.length) {
-          setDiaryImg([...diaryImg, ...newDiaryImgs]);
-          e.target.value = null;
+        if (event.target?.result) {
+          newDiaryImgs.push(event.target.result as string);
+          if (newDiaryImgs.length === files.length) {
+            setDiaryImg([...diaryImg, ...newDiaryImgs]);
+            e.target.value = "";
+          }
         }
       };
       reader.readAsDataURL(file);
@@ -158,18 +167,18 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
     try {
       const formData = new FormData();
 
-      formData.append('diaryTitle', title);
+      formData.append("diaryTitle", title);
       formData.append(
-        'diaryDate',
-        selectedDate ? selectedDate : todayUTC.slice(0, -14),
+        "diaryDate",
+        selectedDate ? selectedDate : todayUTC.slice(0, -14)
       );
-      formData.append('diaryContent', content);
-      formData.append('diaryWeather', selectedOption);
+      formData.append("diaryContent", content);
+      formData.append("diaryWeather", selectedOption);
       for (let i = 0; i < imageFiles.length; i++) {
-        formData.append('diaryImgList', imageFiles[i]);
+        formData.append("diaryImgList", imageFiles[i]);
       }
-      formData.append('diaryFont', diaryFont);
-      formData.append('diaryFontSize', diaryTextSize);
+      formData.append("diaryFont", diaryFont);
+      formData.append("diaryFontSize", diaryTextSize);
       console.log(...formData);
       const res = await SaveDraftDiary(formData);
       console.log(res.data.data.diaryId);
@@ -180,7 +189,7 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
       setDraftList(draftList);
       return newDraftId;
     } catch (error) {
-      console.error('일기 임시 저장 오류', error);
+      console.error("일기 임시 저장 오류", error);
       throw error;
     }
   };
@@ -188,33 +197,33 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
   const handleupdateDiary = async () => {
     try {
       const formData = new FormData();
-      formData.append('diaryId', diaryItemId);
-      formData.append('diaryTitle', title);
+      formData.append("diaryId", diaryItemId);
+      formData.append("diaryTitle", title);
       formData.append(
-        'diaryDate',
-        new Date(diaryDate).toISOString().slice(0, -14),
+        "diaryDate",
+        new Date(diaryDate).toISOString().slice(0, -14)
       );
-      formData.append('diaryStatus', 'PUBLISHED');
-      formData.append('diaryContent', content);
-      formData.append('diaryWeather', selectedOption);
+      formData.append("diaryStatus", "PUBLISHED");
+      formData.append("diaryContent", content);
+      formData.append("diaryWeather", selectedOption);
 
       for (let i = 0; i < imageFiles.length; i++) {
-        imageFiles.length > 0 && formData.append('diaryImgList', imageFiles[i]);
+        imageFiles.length > 0 && formData.append("diaryImgList", imageFiles[i]);
       }
       for (let i = 0; i < diaryKeepImg.length; i++) {
         diaryKeepImg.length > 0 &&
-          formData.append('existingDiaryImgList', diaryKeepImg[i]);
+          formData.append("existingDiaryImgList", diaryKeepImg[i]);
       }
-      formData.append('diaryFont', diaryFont);
-      formData.append('diaryFontSize', diaryTextSize);
-      console.log(...formData);
+      formData.append("diaryFont", diaryFont);
+      formData.append("diaryFontSize", diaryTextSize);
+      console.log(formData);
       await updateDiaryOne(formData);
       setUpdateDiary(false);
       setIsModal(true);
       setIsValid(true);
     } catch (error) {
-      console.error('일기 수정 오류', error);
-      setMessage('일기 수정에 실패했습니다. 다시 시도해주세요');
+      console.error("일기 수정 오류", error);
+      setMessage("일기 수정에 실패했습니다. 다시 시도해주세요");
       setIsValid(false);
     }
   };
@@ -225,7 +234,7 @@ const TopBar = ({ selectedDate, setTemplateOn }) => {
         <div className="flex flex-row justify-between items-center w-[1438px]">
           <button
             type="button"
-            onClick={() => document.getElementById('fileInput').click()}
+            onClick={() => document.getElementById("fileInput")?.click()}
             className="transform scale-75 bg-btnColor hover:bg-btnColorActive border-[#98928C] border w-[103px] h-[116px] rounded-[14px] ml-[203px] flex flex-col justify-center items-center gap-[13.5px] cursor-pointer"
           >
             <img src={img}></img>

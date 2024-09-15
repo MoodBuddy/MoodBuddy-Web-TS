@@ -1,8 +1,14 @@
-import { create } from 'zustand';
+import { SearchParams } from "@type/Search";
+import { create } from "zustand";
 
-const useSearchStore = create((set) => ({
+interface SearchStore {
+  searchParams: SearchParams;
+  setSearchParams: (params: SearchParams) => void;
+}
+
+const useSearchStore = create<SearchStore>((set) => ({
   searchParams: {
-    keyword: '',
+    keyword: "",
     year: null,
     month: null,
     topic: null,

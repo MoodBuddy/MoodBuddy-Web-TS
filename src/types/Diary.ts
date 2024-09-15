@@ -7,7 +7,7 @@ export interface DetailedDiary {
   kakaoId: number;
   diaryTitle: string;
   diaryContent: string;
-  diaryWeather: "SUNNY" | "RAINY" | "SNOWY" | "CLOUDY";
+  diaryWeather: "CLEAR" | "RAIN" | "SNOW" | "CLOUDY";
   diaryStatus: "PUBLISHED" | "DRAFT";
   diarySummary: string;
   diarySubject: string;
@@ -17,6 +17,8 @@ export interface DetailedDiary {
   diaryFontSize: "PX24" | "PX28" | "PX30";
 }
 
+export type Topic = "DAILY" | "GROWTH" | "EMOTION" | "TRAVEL";
+
 export type BasicDiary = Pick<
   DetailedDiary,
   "diaryId" | "diaryDate" | "diaryEmotion"
@@ -25,6 +27,16 @@ export type BasicDiary = Pick<
 export type DiarySummaryData = Pick<
   DetailedDiary,
   "diaryId" | "diaryTitle" | "diarySummary"
+>;
+
+export type DiaryListData = Pick<
+  DetailedDiary,
+  | "diaryId"
+  | "diaryDate"
+  | "diaryTitle"
+  | "diarySummary"
+  | "diaryImgList"
+  | "diaryWeather"
 >;
 
 export type BookMark = {

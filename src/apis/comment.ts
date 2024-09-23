@@ -1,13 +1,10 @@
 import { post } from "./apiUtils";
 import { END_POINT } from "@constants/api";
-import { BaseResponse } from "@type/Api";
 import { Comment } from "@type/Comment";
-
-type CommentResponse = BaseResponse<Comment>;
 
 export const postShortWordToNextMonth = async (
   comment: Comment
-): Promise<CommentResponse> => {
+): Promise<Comment> => {
   try {
     const res = await post<Comment>(
       END_POINT.USER.POST_MONTH_COMMENT,
@@ -21,7 +18,7 @@ export const postShortWordToNextMonth = async (
 
 export const updateShortWordToNextMonth = async (
   comment: Comment
-): Promise<CommentResponse> => {
+): Promise<Comment> => {
   try {
     const res = await post<Comment>(
       END_POINT.USER.POST_MONTH_COMMENT_UPDATE,

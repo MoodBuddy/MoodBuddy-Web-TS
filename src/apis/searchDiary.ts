@@ -1,16 +1,16 @@
-import { get } from "./apiUtils";
 import qs from "qs";
+import { get } from "./apiUtils";
 import { DetailedDiary, DiaryEmotion } from "@type/Diary";
-import { PaginationResponse } from "@type/Api";
 import { END_POINT } from "@constants/api";
 import { SearchParams } from "@type/Search";
+import { Pagination } from "@type/Page";
 
-type FindAllResponse = PaginationResponse<DetailedDiary>;
+type FindAllResponse = Pagination<DetailedDiary>;
 
 export const getFindAll = async (): Promise<FindAllResponse> => {
   try {
     const res = await get<FindAllResponse>(END_POINT.DIARY.GET_FIND_ALL);
-    return res.data.data;
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
@@ -23,7 +23,7 @@ export const getFindAllByEmotion = async ({
     const res = await get<FindAllResponse>(
       END_POINT.DIARY.GET_FIND_ALL_BY_EMOTION(emotion)
     );
-    return res.data.data;
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
@@ -49,7 +49,7 @@ export const getFindAllByFilter = async (
     const queryString = qs.stringify(params, { encode: false });
 
     const res = await get<FindAllResponse>(`${url}?${queryString}`);
-    return res.data.data;
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }

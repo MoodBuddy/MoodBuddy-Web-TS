@@ -9,9 +9,7 @@ import { END_POINT } from "@constants/api";
 import { UserDiary } from "@type/User";
 
 // 현재까지 작성한 일기 횟수
-export const getDiaryNums = async (
-  year: string
-): Promise<DiaryNums> => {
+export const getDiaryNums = async (year: string): Promise<DiaryNums> => {
   try {
     const res = await get<DiaryNums>(END_POINT.USER.GET_DIARY_NUMS(year));
     return res.data;
@@ -51,9 +49,7 @@ export const checkTodayDiary = async (): Promise<UserDiary> => {
 };
 
 // 월별 통계 보기
-export const getMonthStatic = async (
-  date: string
-): Promise<MonthStatic> => {
+export const getMonthStatic = async (date: string): Promise<MonthStatic> => {
   try {
     const res = await get<MonthStatic>(END_POINT.USER.GET_MONTH_STATIC(date));
     return res.data;

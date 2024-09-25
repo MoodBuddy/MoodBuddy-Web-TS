@@ -4,7 +4,7 @@ export interface DetailedDiary {
   diaryId: number;
   diaryDate: string;
   diaryEmotion: diaryEmotion;
-  kakaoId: number;
+  userId: number;
   diaryTitle: string;
   diaryContent: string;
   diaryWeather: "CLEAR" | "RAIN" | "SNOW" | "CLOUDY";
@@ -16,6 +16,7 @@ export interface DetailedDiary {
   diaryFont: "MEETME" | "INTER";
   diaryFontSize: "PX24" | "PX28" | "PX30";
 }
+
 export type DiaryEmotion = {
   emotion:
     | "HAPPINESS"

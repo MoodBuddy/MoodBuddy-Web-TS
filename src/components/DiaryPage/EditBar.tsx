@@ -1,6 +1,6 @@
 import Button from '../common/button/Button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteDiary, getFindOne } from '../../apis/diary';
+import { deleteDiary } from '../../apis/diary';
 import { useNavigate, useParams } from 'react-router-dom';
 import { bookMarkToggle } from '../../apis/bookMark';
 import { useEffect, useState } from 'react';
@@ -14,6 +14,7 @@ import useDiaryDateStore from '../../store/diaryDateStore';
 import useDiaryImgFileStore from '../../store/diaryImgFileStore';
 import useDiaryKeepImgUrlStore from '../../store/diaryKeepImgUrlStore';
 import useTemporaryDiaryStore from '../../store/temporaryDiaryStore';
+import { getFindOne } from '@apis/searchDiary';
 
 const EditBar = ({ diaryId }) => {
   const queryClient = useQueryClient();

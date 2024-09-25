@@ -13,7 +13,7 @@ export const END_POINT = {
     GET_MAIN: `/api/v1/member/main`, // 메인 화면
     GET_PROFILE: `/api/v1/member/main/profile`, // 프로필 조회
     GET_MONTH_STATIC: (date: string) =>
-      `/api/v1/member/main/month-static=${date}`, // 월별 통계 보기
+      `/api/v1/member/main/month-static?month=${date}`, // 월별 통계 보기
     GET_EMOTION_NUMS: `/api/v1/member/main/emotion-nums`, // 감정 횟수 조회
     GET_DIARY_NUMS: (year: string) =>
       `/api/v1/member/main/diary-nums?year=${year}`, // 현재까지 작성한 일기 횟수

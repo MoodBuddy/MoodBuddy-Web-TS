@@ -1,29 +1,35 @@
-import { useEffect, useState } from 'react';
-import close from '../../../public/icon/close.svg';
-import DailyQuestion from './DailyQuestion';
-import EmotionQuestion from './EmotionQuestion';
-import FutureQuestion from './FutureQuestion';
+import { useEffect, useState } from "react";
+import close from "../../../public/icon/close.svg";
+import DailyQuestion from "./DailyQuestion";
+import EmotionQuestion from "./EmotionQuestion";
+import FutureQuestion from "./FutureQuestion";
 
-const Template = ({
+interface TemplateProps {
+  templateOn: boolean;
+  setTemplateOn: () => void;
+  setSelectedTemplate: (template: string) => void;
+  selectedTemplate: string;
+}
+const Template: React.FC<TemplateProps> = ({
   templateOn,
   setTemplateOn,
   setSelectedTemplate,
   selectedTemplate,
 }) => {
-  const [tab, setTab] = useState('left');
-  const [animationClass, setAnimationClass] = useState('');
+  const [tab, setTab] = useState("left");
+  const [animationClass, setAnimationClass] = useState("");
   useEffect(() => {
     if (templateOn) {
-      setAnimationClass('template-enter');
+      setAnimationClass("template-enter");
     } else {
-      setAnimationClass('template-exit');
+      setAnimationClass("template-exit");
     }
   }, [templateOn]);
   return (
     <div
       className={`flex flex-col z-20 absolute top-0 right-[-390px] h-[1600px] bg-[#E8DBCF] rounded-tl-[36px] shadow-2xl 
       ${animationClass}`}
-      style={{ width: '400px' }}
+      style={{ width: "400px" }}
     >
       <div className="flex justify-between w-[350px] mx-auto mt-[66px]">
         <div className="font-meetme text-[42px]">템플릿</div>
@@ -34,31 +40,31 @@ const Template = ({
       </div>
       <div className="flex justify-center w-full mt-[100px]">
         <button
-          className={`grow pb-[17px] ${tab == 'left' ? 'border-b-[2px] border-[#555555]' : 'border-none'} `}
-          onClick={() => setTab('left')}
+          className={`grow pb-[17px] ${tab == "left" ? "border-b-[2px] border-[#555555]" : "border-none"} `}
+          onClick={() => setTab("left")}
         >
           일상질문
         </button>
         <button
-          className={`grow pb-[17px] ${tab == 'mid' ? 'border-b-[2px] border-[#555555]' : 'border-none'} `}
-          onClick={() => setTab('mid')}
+          className={`grow pb-[17px] ${tab == "mid" ? "border-b-[2px] border-[#555555]" : "border-none"} `}
+          onClick={() => setTab("mid")}
         >
           감정질문
         </button>
         <button
-          className={`grow pb-[17px] ${tab == 'right' ? 'border-b-[2px] border-[#555555] ' : 'border-none'} `}
-          onClick={() => setTab('right')}
+          className={`grow pb-[17px] ${tab == "right" ? "border-b-[2px] border-[#555555] " : "border-none"} `}
+          onClick={() => setTab("right")}
         >
           미래질문
         </button>
       </div>
       <div className="border-b-[1px] border-[#BABABA]"></div>
-      {tab == 'left' ? (
+      {tab == "left" ? (
         <DailyQuestion
           setSelectedTemplate={setSelectedTemplate}
           selectedTemplate={selectedTemplate}
         />
-      ) : tab == 'mid' ? (
+      ) : tab == "mid" ? (
         <EmotionQuestion setSelectedTemplate={setSelectedTemplate} />
       ) : (
         <FutureQuestion setSelectedTemplate={setSelectedTemplate} />

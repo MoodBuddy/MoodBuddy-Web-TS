@@ -1,16 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { format, isFuture, isToday } from 'date-fns';
-import { ko } from 'date-fns/locale';
-import { getProfile } from '../../apis/user';
-import CompleteAnalysis from './CompleteAnalysis';
-import useTemporaryDiaryStore from '../../store/temporaryDiaryStore';
-import useDiaryDateStore from '../../store/diaryDateStore';
-import useCalendarClickStore from '../../store/calendarClick';
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { format, isFuture, isToday } from "date-fns";
+import { ko } from "date-fns/locale";
+import { getProfile } from "../../apis/user";
+import CompleteAnalysis from "./CompleteAnalysis";
+import useTemporaryDiaryStore from "../../store/temporaryDiaryStore";
+import useDiaryDateStore from "../../store/diaryDateStore";
+import useCalendarClickStore from "../../store/calendarClick";
 
-const AnalysisEmotion = ({ selectedDate, AnalysisEmotionModal }) => {
-  const [progress, setProgress] = useState(0);
-  const [completeAnaylsis, setCompleteAnaylsis] = useState(false);
+interface AnalysisEmotioProps {
+  selectedDate: string | Date;
+  AnalysisEmotionModal: boolean;
+}
+
+interface ProfileResponse {
+  data: {
+    nickname: string;
+  };
+}
+
+const AnalysisEmotion: React.FC<AnalysisEmotioProps> = ({
+  selectedDate,
+  AnalysisEmotionModal,
+}) => {
+  const [progress, setProgress] = useState<number>(0);
+  const [completeAnaylsis, setCompleteAnaylsis] = useState<boolean>(false);
   const { temporaryDiary } = useTemporaryDiaryStore();
   const { diaryDate } = useDiaryDateStore();
   const { calendarClick } = useCalendarClickStore();
@@ -19,39 +33,39 @@ const AnalysisEmotion = ({ selectedDate, AnalysisEmotionModal }) => {
   const isSelectedDateToday = isToday(new Date(selectedDate));
   const isSelectedDateFuture = isFuture(new Date(selectedDate));
   const dayDescription = isSelectedDateToday
-    ? '오늘'
+    ? "오늘"
     : isSelectedDateFuture
-      ? '미래'
-      : '과거';
+      ? "미래"
+      : "과거";
 
   //임시저장 -> 일기 작성 -> 감정 분석
   const isDiaryDateToday = isToday(new Date(diaryDate));
   const isDiaryDateFuture = isFuture(new Date(diaryDate));
   const DiaryDescription = isDiaryDateToday
-    ? '오늘'
+    ? "오늘"
     : isDiaryDateFuture
-      ? '미래'
-      : '과거';
+      ? "미래"
+      : "과거";
 
-  const formattedCalendarDate = format(new Date(selectedDate), 'yy.MM.dd (E)', {
+  const formattedCalendarDate = format(new Date(selectedDate), "yy.MM.dd (E)", {
     locale: ko,
   });
 
-  const formattedDiaryDate = format(new Date(diaryDate), 'yy.MM.dd (E)', {
+  const formattedDiaryDate = format(new Date(diaryDate), "yy.MM.dd (E)", {
     locale: ko,
   });
 
-  const formattedDate = format(new Date(), 'yy.MM.dd (E)', {
+  const formattedDate = format(new Date(), "yy.MM.dd (E)", {
     locale: ko,
   });
-  const { isError, data, error } = useQuery({
-    queryKey: ['profile'],
+  const { isError, data, error } = useQuery<ProfileResponse>({
+    queryKey: ["profile"],
     queryFn: getProfile,
   });
-  const nickname = data.nickname;
+  const nickname = data?.data?.nickname || "";
 
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout;
     if (AnalysisEmotionModal) {
       setProgress(0); // 모달창이 열릴 때 0으로 리셋
       interval = setInterval(() => {
@@ -73,16 +87,16 @@ const AnalysisEmotion = ({ selectedDate, AnalysisEmotionModal }) => {
     }
   }, [progress]);
 
-  const hasFinalConsonant = (char) => {
+  const hasFinalConsonant = (char: string): boolean => {
     const charCode = char.charCodeAt(0); //이름 끝자의 유니코드 값
     const diff = charCode - 0xac00; //유니코드 값에서 한글 음절의 시작점인 0XAC00을 뺌
     const jong = diff % 28; //남은 값을 28로 나눠서 나머지 구함
     return jong !== 0; //나머지가 0이 아니면 받침 존재
   };
-  const getPostPosition = (nickname) => {
-    if (!nickname) return '은'; //닉네임이 없으면 기본 조사 '은'
+  const getPostPosition = (nickname: string): string => {
+    if (!nickname) return "은"; //닉네임이 없으면 기본 조사 '은'
     const lastChar = nickname[nickname.length - 1];
-    return hasFinalConsonant(lastChar) ? '은' : '는';
+    return hasFinalConsonant(lastChar) ? "은" : "는";
   };
 
   return (

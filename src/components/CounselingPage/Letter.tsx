@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import back from '../../../public/icon/back.svg';
-import SelectModal from './SelectModal';
-import useContentStore from '../../store/contentStore';
-import { formatDate } from '../../utils/format';
-import { useNavigate } from 'react-router-dom';
-import Button from '../common/button/Button';
-import { getProfile } from '../../apis/user';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from "react";
+import back from "../../../public/icon/back.svg";
+import SelectModal from "./SelectModal";
+import useContentStore from "../../store/contentStore";
+import { formatDate } from "../../utils/format";
+import { useNavigate } from "react-router-dom";
+import Button from "../common/button/Button";
+import { getProfile } from "../../apis/user";
+import { useQuery } from "@tanstack/react-query";
 
 const Letter = () => {
   const { content, setContent } = useContentStore();
@@ -16,43 +16,47 @@ const Letter = () => {
   };
   const navigate = useNavigate();
 
-  const { isError, data, error } = useQuery({
-    queryKey: ['getProfile'],
-    queryFn: getProfile,
-  });
+  // const { isError, data, error } = useQuery({
+  //   queryKey: ['getProfile'],
+  //   queryFn: getProfile,
+  // });
+
+  const data = [];
 
   const todayDate = formatDate();
 
   return (
     <div className="z-10">
       <div>
-        <div className="box-content border-[1px] w-[1000px] h-[939px] border-black  bg-[#F7F3EF] rounded-3xl pb-[20px] mb-[145px]">
+        <div className="box-content border-[1px] w-[1180px] h-[716px] border-black  bg-[#F7F3EF] rounded-3xl pb-[20px] mb-[145px]">
           {/* 상단 보내기 바 */}
-          <div className="px-[23px] py-3 w-full border-b-[1px] border-black flex justify-between items-center">
-            <button onClick={() => navigate(-1)}>
-              <img src={back} className="w-6 h-6" />
-            </button>
-            <div className="font-medium text-2xl ml-20">To.QUDDY</div>
+          <div className="flex justify-between items-center w-full h-[104px] px-[23px] pt-2">
+            <div className="ml-[50px] font-inter font-medium text-[38.55px] text-[#747474] ">
+              To.QUDDY
+            </div>
+
             <Button
               onClick={isSending}
-              className="w-[100px] h-12 rounded-[13px] bg-[#D8B18E] font-bold text-lg"
+              className="w-[170px] h-[55px] rounded-[13px] bg-[#D8B18E] font-semibold text-[23px]"
             >
               보내기
             </Button>
           </div>
-
+          <div className="flex flex justify-center">
+            <div className=" w-[1113px] border-b-[1px] border-black "></div>
+          </div>
           {/* 편지 내용 작성 */}
           <div className="flex flex-col justify-center items-center">
             <textarea
               type="text"
-              className="mt-[150px] px-28 mr-24 text-center font-light text-xl leading-[66px] bg-[#F7F3EF] outline-none resize-none w-[900px] h-[600px] overflow-y-auto custom-scrollbar"
+              className="w-[1100px] h-[530px] bg-[#F7F3EF] mt-5  font-inter font-light text-xl leading-[45px]  outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-[7c7c7c] placeholder:opacity-50"
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);
               }}
-              placeholder="고민이 있다면 저에게 말해봐요 !
-내가 다음날 답장을 보내줄게요.
-나에게 고민을 털어버리고 훌훌 털어버려요"
+              placeholder="고민이 있다면, 쿼디에게 솔직하게 털어놓아보세요 
+다음날, 쿼디가 답장을 보내줍니다.
+쿼디에게 털어놓고 마음이 편안해지길 바랍니다"
             />
             <div className="self-end flex flex-col items-end font-medium text-xl gap-[10px] mr-10">
               <div>{todayDate}</div>

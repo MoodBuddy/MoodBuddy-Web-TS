@@ -25,6 +25,10 @@ const Letter = () => {
 
   const todayDate = formatDate();
 
+  const letter = {
+    length: 1,
+  };
+
   return (
     <div className="z-10">
       <div>
@@ -49,14 +53,21 @@ const Letter = () => {
           <div className="flex flex-col justify-center items-center">
             <textarea
               type="text"
-              className="w-[1100px] h-[530px] bg-[#F7F3EF] mt-5  font-inter font-light text-xl leading-[45px]  outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-[7c7c7c] placeholder:opacity-50"
+              className="w-[1100px] h-[500px] bg-[#F7F3EF] mt-10  font-inter font-light text-xl leading-[45px]  outline-none resize-none overflow-y-auto custom-scrollbar placeholder:text-[7c7c7c] placeholder:opacity-50"
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);
               }}
-              placeholder="고민이 있다면, 쿼디에게 솔직하게 털어놓아보세요 
+              placeholder={`${
+                letter.length === 0
+                  ? `편지지가 없습니다
+오늘의 일기를 작성해주세요!
+
+`
+                  : `고민이 있다면, 쿼디에게 솔직하게 털어놓아보세요 
 다음날, 쿼디가 답장을 보내줍니다.
-쿼디에게 털어놓고 마음이 편안해지길 바랍니다"
+쿼디에게 털어놓고 마음이 편안해지길 바랍니다`
+              }`}
             />
             <div className="self-end flex flex-col items-end font-medium text-xl gap-[10px] mr-10">
               <div>{todayDate}</div>

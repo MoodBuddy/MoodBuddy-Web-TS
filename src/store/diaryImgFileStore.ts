@@ -1,18 +1,24 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const useDiaryImgFileStore = create((set) => ({
+type DiaryImgFileStore = {
+  imageFiles: File[];
+  setImageFiles: (newImgFiles: File[]) => void;
+  addImageFile: (file: File) => void;
+  removeImageFile: (index: number) => void;
+};
+const useDiaryImgFileStore = create<DiaryImgFileStore>((set) => ({
   imageFiles: [], // 파일 배열로 상태를 초기화
   setImageFiles: (newImgFiles) => {
     set(() => {
       const updatedImgFiles = [...newImgFiles];
-      console.log('update Diary Images:', updatedImgFiles);
+      console.log("update Diary Images:", updatedImgFiles);
       return { imageFiles: updatedImgFiles };
     });
   },
   addImageFile: (file) => {
     set((state) => {
       const updatedImgFiles = [...state.imageFiles, file]; // 기존 배열에 파일을 추가
-      console.log('add Diary Image:', updatedImgFiles);
+      console.log("add Diary Image:", updatedImgFiles);
       return { imageFiles: updatedImgFiles };
     });
   },

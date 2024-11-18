@@ -1,13 +1,12 @@
 import { create } from "zustand";
 
-interface TemporaryDiaryState {
+type TemporaryDiaryStore = {
   temporaryDiary: boolean;
   setTemporaryDiary: (newState: boolean) => void;
-}
-
-const useTemporaryDiaryStore = create<TemporaryDiaryState>((set) => ({
+};
+const useTemporaryDiaryStore = create<TemporaryDiaryStore>((set) => ({
   temporaryDiary: false,
-  setTemporaryDiary: (newState: boolean) => set({ temporaryDiary: newState }),
+  setTemporaryDiary: (newState) => set({ temporaryDiary: newState }),
 }));
 
 export default useTemporaryDiaryStore;

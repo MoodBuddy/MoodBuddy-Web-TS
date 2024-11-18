@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
-import Footer from '../../components/common/layout/Footer';
-import NavBar from '../../components/common/layout/NavBar';
-import DiaryList from '../../components/SearchPage/DiaryList';
-import SearchBar from '../../components/SearchPage/SearchSection';
-import styles from '@styles/check.module.css';
-import useTemporaryDiaryStore from '../../store/temporaryDiaryStore';
+import { useEffect } from "react";
+import Footer from "../../components/common/layout/Footer";
+import NavBar from "../../components/common/layout/NavBar";
+import DiaryList from "../../components/SearchPage/DiaryList";
+import SearchBar from "../../components/SearchPage/SearchSection";
+import styles from "@styles/check.module.css";
+import useTemporaryDiaryStore from "../../store/temporaryDiaryStore";
 
 const SearchListPage = () => {
   const { setTemporaryDiary } = useTemporaryDiaryStore();
+
   useEffect(() => {
     setTemporaryDiary(false);
   }, []);
+
   return (
     <div>
       <NavBar />

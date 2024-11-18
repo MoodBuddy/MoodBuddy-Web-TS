@@ -72,10 +72,6 @@ const NavBar = () => {
     queryFn: checkTodayDiary,
   });
 
-  useEffect(() => {
-    console.log(diaryData);
-  }, [diaryData]);
-
   const handleMenuClick = (event, to) => {
     setCalendarClick(false);
     setUpdateDiary(false);

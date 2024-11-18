@@ -13,7 +13,7 @@ export const END_POINT = {
     GET_MAIN: `/api/v1/member/main`, // 메인 화면
     GET_PROFILE: `/api/v1/member/main/profile`, // 프로필 조회
     GET_MONTH_STATIC: (date: string) =>
-      `/api/v1/member/main/month-static=${date}`, // 월별 통계 보기
+      `/api/v1/member/main/month-static?month=${date}`, // 월별 통계 보기
     GET_EMOTION_NUMS: `/api/v1/member/main/emotion-nums`, // 감정 횟수 조회
     GET_DIARY_NUMS: (year: string) =>
       `/api/v1/member/main/diary-nums?year=${year}`, // 현재까지 작성한 일기 횟수
@@ -25,7 +25,7 @@ export const END_POINT = {
     POST_UPDATE: `/api/v1/member/diary/update`, // 일기 수정
     POST_SAVE: `/api/v1/member/diary/save`, // 일기 작성
     POST_DRAFT_SAVE: `/api/v1/member/diary/draftSave`, // 일기 임시 저장
-    POST_DESCRIPTION: `/api/v1/member/diary/description`, // 일기 설명 저장
+    POST_DESCRIPTION: `/api/v1/member/diary/description`, // 일기 감정 분석
     GET_FIND_ONE: (diaryId: number) =>
       `/api/v1/member/diary/findOne/${diaryId}`, // 일기 하나 조회
     GET_FIND_ALL: `/api/v1/member/diary/findAllPageable?page=0&size=100`, // 일기 전체 조회

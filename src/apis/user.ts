@@ -1,17 +1,11 @@
 import { get, post } from "./apiUtils";
 import { END_POINT } from "@constants/api";
 import { Profile, User } from "@type/User";
-import { BaseResponse } from "@type/Api";
-
-type UserResponse = BaseResponse<User>;
-type ProfileResponse = BaseResponse<Profile>;
-type ProfileEditResponse = BaseResponse<Profile>;
 
 // 유저 정보 가져오기
-export const getUserInfo = async (): Promise<UserResponse> => {
+export const getUserInfo = async (): Promise<User> => {
   try {
     const res = await get<User>(END_POINT.USER.GET_MAIN);
-    console.log(res);
     return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
@@ -19,7 +13,7 @@ export const getUserInfo = async (): Promise<UserResponse> => {
 };
 
 // 프로필 정보 가져오기
-export const getProfile = async (): Promise<ProfileResponse> => {
+export const getProfile = async (): Promise<Profile> => {
   try {
     const res = await get<Profile>(END_POINT.USER.GET_PROFILE);
     return res.data;
@@ -31,7 +25,7 @@ export const getProfile = async (): Promise<ProfileResponse> => {
 // 프로필 수정
 export const postProfileEdit = async (
   formData: Profile
-): Promise<ProfileEditResponse> => {
+): Promise<Profile> => {
   try {
     const res = await post<Profile>(
       END_POINT.USER.POST_PROFILE_EDIT,

@@ -1,4 +1,3 @@
-import { BaseResponse } from "@type/Api";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import client from "./client";
 
@@ -6,7 +5,7 @@ import client from "./client";
 export const get = async <T>(
   url: string,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<BaseResponse<T>>> => {
+): Promise<AxiosResponse<T>> => {
   try {
     const response = await client.get(url, config);
     return response;
@@ -20,7 +19,7 @@ export const post = async <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<BaseResponse<T>>> => {
+): Promise<AxiosResponse<T>> => {
   try {
     const response = await client.post(url, data, config);
     return response;

@@ -1,5 +1,4 @@
 import { get, post } from "./apiUtils";
-import { BaseResponse } from "@type/Api";
 import { END_POINT } from "@constants/api";
 import {
   BaseLetter,
@@ -8,11 +7,7 @@ import {
   LetterDetail,
 } from "@type/Letter";
 
-type LetterResponse = BaseResponse<Letter>;
-type LetterDetailsResponse = BaseResponse<LetterDetail>;
-type LetterPostResponse = BaseResponse<BaseLetter>;
-
-export const getLetter = async (): Promise<LetterResponse> => {
+export const getLetter = async (): Promise<Letter> => {
   try {
     const res = await get<Letter>(END_POINT.LETTER.GET_LETTER);
     return res.data;
@@ -23,7 +18,7 @@ export const getLetter = async (): Promise<LetterResponse> => {
 
 export const getLetterDetails = async (
   letterId: number
-): Promise<LetterDetailsResponse> => {
+): Promise<LetterDetail> => {
   try {
     const res = await get<LetterDetail>(
       END_POINT.LETTER.GET_LETTER_DETAILS(letterId)
@@ -36,7 +31,7 @@ export const getLetterDetails = async (
 
 export const postLetter = async (
   letterData: CreateLetterRequest
-): Promise<LetterPostResponse> => {
+): Promise<BaseLetter> => {
   try {
     const res = await post<BaseLetter>(
       END_POINT.LETTER.POST_LETTER,
@@ -50,7 +45,7 @@ export const postLetter = async (
 
 export const postAlarm = async (
   alarm: boolean
-): Promise<LetterPostResponse> => {
+): Promise<BaseLetter> => {
   try {
     const res = await post<BaseLetter>(END_POINT.LETTER.POST_ALARM, alarm);
     return res.data;

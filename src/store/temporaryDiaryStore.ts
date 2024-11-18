@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 type TemporaryDiaryStore = {
   temporaryDiary: boolean;
   setTemporaryDiary: (newState: boolean) => void;

@@ -1,23 +1,18 @@
 import { END_POINT } from "@constants/api";
 import { get, post } from "./apiUtils";
-import { BaseResponse } from "@type/Api";
 import { BookMark, DetailedDiary } from "@type/Diary";
 
-type BookMarkResponse = BaseResponse<DetailedDiary>;
-type BookMarkToggleResponse = BaseResponse<BookMark>;
-
-export const getBookMarkFindAll = async (): Promise<BookMarkResponse> => {
+export const getBookMarkFindAll = async (): Promise<DetailedDiary> => {
   try {
     const res = await get<DetailedDiary>(END_POINT.BOOKMARK.GET_ALL);
-    return res.data.data;
+    console.log(res);
+    return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");
   }
 };
 
-export const bookMarkToggle = async (
-  diaryId: number
-): Promise<BookMarkToggleResponse> => {
+export const bookMarkToggle = async (diaryId: number): Promise<BookMark> => {
   try {
     const res = await post<BookMark>(
       END_POINT.BOOKMARK.POST_TOGGLE(diaryId),

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import close from '../../../public/icon/close.svg';
 import Storage from './Storage';
-import { deleteDraft, getFindDraftAll, getFindOne } from '../../apis/diary';
+import { deleteDraft, getFindDraftAll } from '../../apis/diary';
 import useDraftEditStore from '../../store/draftEditStore';
 import useDraftNumStore from '../../store/draftNumStore';
 import useDraftListStore from '../../store/draftListStore';

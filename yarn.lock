@@ -4354,6 +4354,7 @@ __metadata:
     gsap: "npm:^3.12.5"
     html-to-draftjs: "npm:^1.5.0"
     http-proxy-middleware: "npm:^3.0.0"
+    postcss: "npm:^8.4.49"
     prettier: "npm:^3.3.2"
     qs: "npm:^6.12.3"
     quill: "npm:^2.0.2"
@@ -4774,7 +4775,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.43, postcss@npm:^8.4.47":
+"postcss@npm:^8.4.43, postcss@npm:^8.4.47, postcss@npm:^8.4.49":
   version: 8.4.49
   resolution: "postcss@npm:8.4.49"
   dependencies:

@@ -25,6 +25,7 @@
     "gsap": "^3.12.5",
     "html-to-draftjs": "^1.5.0",
     "http-proxy-middleware": "^3.0.0",
+    "postcss": "^8.4.49",
     "qs": "^6.12.3",
     "quill": "^2.0.2",
     "react": "^18.2.0",

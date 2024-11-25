@@ -6,7 +6,6 @@ import styles from '@styles/check.module.css';
 import Footer from '../../components/common/layout/Footer';
 import { useQuery } from '@tanstack/react-query';
 import { getLetterDetails } from '../../apis/letter';
-import halfHappyQuddy from '@assets/halfHappyQuddy.svg';
 
 const QuddyLetter = () => {
   const { id } = useParams();
@@ -34,13 +33,6 @@ const QuddyLetter = () => {
       >
         <QuddyLetterTopBar data={letter} />
         <QuddyLetterContent data={letter} />
-      </div>
-      <div className="relative">
-        <img
-          src={halfHappyQuddy}
-          alt="halfHappyQuddy"
-          className="w-[700px] h-[500px] absolute left-[-360px] top-[-243px] transform -translate-y-1/2"
-        />
       </div>
       <Footer />
     </>

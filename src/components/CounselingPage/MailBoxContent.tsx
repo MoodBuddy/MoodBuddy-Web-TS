@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addHours, addMinutes, addSeconds } from 'date-fns';
+import { addHours, addSeconds } from 'date-fns';
 import { formatDate } from '../../utils/format';
 
 const MailBoxContent = ({ letter }) => {
   const navigate = useNavigate();
-  const [replyMessage, setReplyMessage] = useState('');
+  const [replyMessage, setReplyMessage] = useState({ text: '', style: '' });
 
   const handleMailBox = () => {
     navigate(`/counseling/letter/${letter.letterId}`);
@@ -19,10 +19,17 @@ const MailBoxContent = ({ letter }) => {
 
       const replyAvailableTime = addSeconds(createdTime, 30);
       const currentTime = new Date();
+
       if (currentTime >= replyAvailableTime) {
-        setReplyMessage('ㅣ 답장이 도착했어요.');
+        setReplyMessage({
+          text: 'ㅣ 답장이 도착했습니다.',
+          style: 'text',
+        });
       } else {
-        setReplyMessage('');
+        setReplyMessage({
+          text: 'ㅣ 답장이 아직 도착하지 않았습니다.',
+          style: 'tex-gray-300',
+        });
       }
     }
   }, [letter.letterDate]);
@@ -30,12 +37,16 @@ const MailBoxContent = ({ letter }) => {
   const formattedDate = formatDate(letter.letterDate);
 
   return (
-    <div
-      onClick={handleMailBox}
-      className="flex items-center w-full h-[58px] pl-[25px] box-content py-3 font-medium text-[22px] border-b-[1px] border-[#D1D1D1] cursor-pointer"
-    >
-      {formattedDate} ㅣ 쿼디에게 고민을 보냈어요. {replyMessage}
-    </div>
+    <>
+      <div
+        onClick={handleMailBox}
+        className='flex items-center w-full h-[58px] pl-[25px] box-content py-3 font-medium text-[22px] border-[#D1D1D1] cursor-pointer'
+      >
+        {formattedDate} ㅣ 쿼디에게 고민을 보냈습니다.
+        <span className={replyMessage.style}>{replyMessage.text}</span>
+      </div>
+      <div className='mx-4 my-1 border-b-[0.75px] border-gray-400'></div>
+    </>
   );
 };
 

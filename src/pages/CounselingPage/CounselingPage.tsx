@@ -7,6 +7,7 @@ import Footer from '../../components/common/layout/Footer';
 import NavBar from '../../components/common/layout/NavBar';
 import styles from '@styles/check.module.css';
 import halfHappyQuddy from '@assets/halfHappyQuddy.svg';
+import CounselingLetterTopBar from '@components/CounselingPage/CheckLetterTopBar';
 
 const CounselingPage = () => {
   const {
@@ -29,20 +30,12 @@ const CounselingPage = () => {
       <div
         className={`flex flex-col justify-center items-center ${styles.check}`}
       >
-        <CounselingTopBar />
-        <div className="transform scale-[85%] relative top-[-80px]">
-          <div className="flex justify-center gap-[19px]">
-            <Profile data={letter} />
+        <CounselingLetterTopBar />
+        <div className='transform scale-[85%] relative top-[-60px]'>
+          <div className='flex justify-center gap-[19px]'>
             <MailBox letters={letter.letterResPageAnswerDTOList} />
           </div>
         </div>
-      </div>
-      <div className="relative">
-        <img
-          src={halfHappyQuddy}
-          alt="halfHappyQuddy"
-          className="w-[700px] h-[500px] absolute left-[-360px] top-[-243px] transform -translate-y-1/2"
-        />
       </div>
       <Footer />
     </>

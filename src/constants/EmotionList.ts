@@ -1,57 +1,57 @@
 export type diaryEmotion =
-  | "Happiness"
-  | "Anger"
-  | "Disgust"
-  | "Fear"
-  | "Neutral"
-  | "Sadness"
-  | "Surprise";
+  | "HAPPINESS"
+  | "ANGER"
+  | "DISGUST"
+  | "FEAR"
+  | "NEUTRAL"
+  | "SADNESS"
+  | "SURPRISE";
 
 export const emotions = [
   {
-    fullName: "Happiness",
+    fullName: "HAPPINESS",
     name: " H",
     value: 12,
     key: "happinessCount",
     color: "#C79A76",
   },
   {
-    fullName: "Anger",
+    fullName: "ANGER",
     name: " A",
     value: 4,
     key: "angerCount",
     color: "#CE8C98",
   },
   {
-    fullName: "Disgust",
+    fullName: "DISGUST",
     name: " D\u00A0",
     value: 6,
     key: "disgustCount",
     color: "#F08D74",
   },
   {
-    fullName: "Fear",
+    fullName: "FEAR",
     name: " F\u00A0",
     value: 3,
     key: "fearCount",
     color: "#9C8EBD",
   },
   {
-    fullName: "Neutral",
+    fullName: "NEUTRAL",
     name: " N\u00A0",
     value: 3,
     key: "neutralCount",
     color: "#9CB57A",
   },
   {
-    fullName: "Sadness",
+    fullName: "SADNESS",
     name: "Sa",
     value: 3,
     key: "sadnessCount",
     color: "#7598BA",
   },
   {
-    fullName: "Surprise",
+    fullName: "SURPRISE",
     name: "Su",
     value: 2,
     key: "surpriseCount",

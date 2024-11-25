@@ -1,12 +1,12 @@
-import { format } from 'date-fns';
-import CalendarHeader from './CalendarHeader';
-import CalendarBody from './CalendarBody';
-import helloQuddy from '@assets/helloQuddy.svg';
-import calendarFlower from '@assets/calendarFlower.svg';
-import calendarRainbow from '@assets/calendarRainbow.svg';
-import useUserStore from '../../../store/userStore';
-import DiarySummary from './DiarySummary';
-import useCalendarStore from '../../../store/calendarStore';
+import { format } from "date-fns";
+import CalendarHeader from "./CalendarHeader";
+import CalendarBody from "./CalendarBody";
+import helloQuddy from "@assets/helloQuddy.svg";
+import calendarFlower from "@assets/calendarFlower.svg";
+import calendarRainbow from "@assets/calendarRainbow.svg";
+import useUserStore from "../../../store/userStore";
+import DiarySummary from "./DiarySummary";
+import useCalendarStore from "../../../store/calendarStore";
 
 const CalendarCard = () => {
   const { selectedDate } = useCalendarStore();
@@ -15,13 +15,17 @@ const CalendarCard = () => {
   }));
 
   const nickname = userInfo.nickname;
-  const formattedDay = format(selectedDate, 'd');
+  const formattedDay = format(selectedDate, "d");
 
   return (
     <div className="relative flex justify-end mt-24 mb-36">
-      좌측 쿼디 이미지
+      {/* 좌측 쿼디 이미지 */}
       <div className="hidden xl:block absolute left-[-100px] top-[50%] transform -translate-y-1/2 z-0">
-        <img src={helloQuddy} alt="helloQuddy" className="w-[1000px] h-[1000px]"/>
+        <img
+          src={helloQuddy}
+          alt="helloQuddy"
+          className="w-[1000px] h-[1000px]"
+        />
       </div>
 
       {/* 클로버 이미지 */}
@@ -53,7 +57,7 @@ const CalendarCard = () => {
         <h1 className="font-meetme text-5xl flex justify-center mt-8">
           {nickname
             ? `${nickname}님의 캘린더를 통해 성장과정을 봐볼까요?`
-            : '프로필을 설정하고 캘린더를 통해 성장과정을 살펴보세요 !'}
+            : "프로필을 설정하고 캘린더를 통해 성장과정을 살펴보세요 !"}
         </h1>
 
         {/* 캘린더 */}

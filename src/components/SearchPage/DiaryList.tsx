@@ -1,49 +1,58 @@
-import { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import {
   getFindAll,
   getFindAllByEmotion,
   getFindAllByFilter,
-} from '../../apis/diary';
-import { getBookMarkFindAll } from '../../apis/bookMark';
-import { weatherList } from '../../constants/WeatherList';
-import useSearchStore from '../../store/searchStore';
+} from "../../apis/searchDiary";
+import { getBookMarkFindAll } from "../../apis/bookMark";
+import { weatherList } from "../../constants/WeatherList";
+import useSearchStore from "../../store/searchStore";
+import { DiaryListData } from "@type/Diary";
 
-const DiaryList = ({ filterType, emotion, onClose }) => {
+interface DiaryListProps {
+  filterType: "all" | "emotion" | "bookMark" | "search";
+  emotion?: string;
+  onClose?: () => void;
+}
+
+const DiaryList = ({ filterType, emotion, onClose }: DiaryListProps) => {
   const { searchParams } = useSearchStore();
-  const [sortOrder, setSortOrder] = useState('latest');
+  const [sortOrder, setSortOrder] = useState<"latest" | "oldest">("latest");
 
   //searchParams가 비어있으면 filterType을 'all'로 설정
   if (
-    searchParams.keyword === '' &&
+    searchParams.keyword === "" &&
     searchParams.year == null &&
     searchParams.month == null &&
     searchParams.topic == null &&
     searchParams.diaryEmotion == null &&
-    filterType !== 'bookMark'
+    filterType !== "bookMark"
   ) {
-    filterType = 'all';
+    filterType = "all";
   }
 
   // 필터 타입에 따라 다른 API 함수 선택
   const getDiariesQuery = () => {
     switch (filterType) {
-      case 'emotion':
+      case "emotion":
         return getFindAllByEmotion({ emotion });
-      case 'bookMark':
+      case "bookMark":
         return getBookMarkFindAll();
-      case 'search':
+      case "search":
         return getFindAllByFilter(searchParams);
-      case 'all':
+      case "all":
         return getFindAll();
       default:
         return getFindAll();
     }
   };
 
-  const { isError, data, error } = useQuery({
-    queryKey: ['diaries', filterType, emotion, searchParams],
+  const { isError, data, error } = useQuery<{
+    content: DiaryListData[];
+  }>({
+    queryKey: ["diaries", filterType, emotion, searchParams],
     queryFn: getDiariesQuery,
   });
 
@@ -56,13 +65,15 @@ const DiaryList = ({ filterType, emotion, onClose }) => {
   }
 
   const sortedData = useMemo(() => {
-    if (sortOrder === 'latest') {
+    if (sortOrder === "latest") {
       return [...data.content].sort(
-        (a, b) => new Date(b.diaryDate) - new Date(a.diaryDate),
+        (a, b) =>
+          new Date(b.diaryDate).getTime() - new Date(a.diaryDate).getTime()
       );
     } else {
       return [...data.content].sort(
-        (a, b) => new Date(a.diaryDate) - new Date(b.diaryDate),
+        (a, b) =>
+          new Date(a.diaryDate).getTime() - new Date(b.diaryDate).getTime()
       );
     }
   }, [data.content, sortOrder]);
@@ -72,18 +83,18 @@ const DiaryList = ({ filterType, emotion, onClose }) => {
       {/* 시간순서 정렬 */}
       <div className="flex justify-end p-2 mr-4 text-zinc-400 sticky top-0">
         <button
-          onClick={() => setSortOrder('latest')}
+          onClick={() => setSortOrder("latest")}
           className={`${
-            sortOrder === 'latest' ? 'text-[#B98D6D]' : 'text-inherit'
+            sortOrder === "latest" ? "text-[#B98D6D]" : "text-inherit"
           }`}
         >
           최신순
         </button>
         <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
         <button
-          onClick={() => setSortOrder('oldest')}
+          onClick={() => setSortOrder("oldest")}
           className={`${
-            sortOrder === 'oldest' ? 'text-[#B98D6D]' : 'text-inherit'
+            sortOrder === "oldest" ? "text-[#B98D6D]" : "text-inherit"
           }`}
         >
           오래된 순

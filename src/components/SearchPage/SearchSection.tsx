@@ -1,38 +1,40 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { quddies } from '../../constants/QuddyList';
-import { topics } from '../../constants/TopicList';
-import searchIcon from '../../../public/icon/searchIcon.svg';
-import Button from '../common/button/Button';
-import useSearchStore from '../../store/searchStore';
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import searchIcon from "../../../public/icon/searchIcon.svg";
+import Button from "../common/button/Button";
+import useSearchStore from "@store/searchStore";
+import { quddies } from "@constants/QuddyList";
+import { topics } from "@constants/TopicList";
+import { diaryEmotion } from "@constants/EmotionList";
+import { SearchParams } from "@type/Search";
+import { Topic } from "@type/Diary";
 
 const SearchSection = () => {
-  const [showDetailOptions, setShowDetailOptions] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [selectedQuddy, setSelectedQuddy] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [isSearchEnabled, setIsSearchEnabled] = useState(false);
+  const [showDetailOptions, setShowDetailOptions] = useState<boolean>(false);
+  const [selectedTopic, setSelectedTopic] = useState<number | null>(null);
+  const [selectedQuddy, setSelectedQuddy] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [month, setMonth] = useState<string>("");
+  const [isSearchEnabled, setIsSearchEnabled] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const { setSearchParams } = useSearchStore();
 
   const toggleDetailOptions = () => {
     setShowDetailOptions(!showDetailOptions);
-
-    setSearchQuery('');
-    setYear('');
-    setMonth('');
+    setSearchQuery("");
+    setYear("");
+    setMonth("");
     setSelectedTopic(null);
     setSelectedQuddy(null);
   };
 
-  const handleTopicClick = (index) => {
+  const handleTopicClick = (index: number) => {
     setSelectedTopic(selectedTopic === index ? null : index);
   };
 
-  const handleQuddyClick = (index) => {
+  const handleQuddyClick = (index: number) => {
     setSelectedQuddy(selectedQuddy === index ? null : index);
   };
 
@@ -40,24 +42,40 @@ const SearchSection = () => {
     const parsedYear = year ? parseInt(year, 10) : null;
     const parsedMonth = month ? parseInt(month, 10) : null;
 
-    const searchParams = {
+    const searchParams: SearchParams = {
       keyword: searchQuery,
       year: parsedYear,
       month: parsedMonth,
-      topic: selectedTopic !== null ? topics[selectedTopic].value : null,
+      topic:
+        selectedTopic !== null ? (topics[selectedTopic].value as Topic) : null,
       diaryEmotion:
-        selectedQuddy !== null ? quddies[selectedQuddy].emotion : null,
+        selectedQuddy !== null
+          ? (quddies[selectedQuddy].emotion as diaryEmotion)
+          : null,
     };
+
     setSearchParams(searchParams);
     setShowDetailOptions(false);
-    navigate('/search/searchList');
+    navigate("/search/searchList");
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
       handleSearch();
       setShowDetailOptions(false);
     }
+  };
+
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setYear(e.target.value);
+  };
+
+  const handleMonthChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMonth(e.target.value);
+  };
+
+  const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
 
   useEffect(() => {
@@ -68,7 +86,7 @@ const SearchSection = () => {
       parsedMonth ||
       selectedTopic !== null ||
       selectedQuddy !== null ||
-      searchQuery.trim() !== ''
+      searchQuery.trim() !== ""
     ) {
       setIsSearchEnabled(true);
     } else {
@@ -84,7 +102,7 @@ const SearchSection = () => {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchQueryChange}
               onKeyDown={handleKeyDown}
               className="w-[890px] h-[56px] text-xl placeholder-stone-300 bg-white rounded-[18px] border-2 border-black px-10"
               placeholder="검색어를 입력하세요."
@@ -119,13 +137,13 @@ const SearchSection = () => {
                   className="w-[352px] h-[62px] text-2xl placeholder-stone-300 bg-white/opacity-90 rounded-l-2xl border-l border-y border-[#999898]  px-10"
                   placeholder="년"
                   value={year}
-                  onChange={(e) => setYear(e.target.value)}
+                  onChange={handleYearChange}
                 />
                 <input
                   className="w-[352px] h-[62px] text-2xl placeholder-stone-300 bg-white/opacity-90 rounded-r-2xl border-r border-y border-[#999898] px-10"
                   placeholder="월"
                   value={month}
-                  onChange={(e) => setMonth(e.target.value)}
+                  onChange={handleMonthChange}
                 />
               </div>
 
@@ -139,7 +157,7 @@ const SearchSection = () => {
                       onClick={() => handleTopicClick(index)}
                       color="white"
                       className={`rounded-[14.45px] border border-[#999898] ${
-                        selectedTopic === index ? 'bg-[#ddc5b0]' : ''
+                        selectedTopic === index ? "bg-[#ddc5b0]" : ""
                       }`}
                     >
                       <p className="px-12 py-1 text-xl font-medium">
@@ -160,8 +178,8 @@ const SearchSection = () => {
                       onClick={() => handleQuddyClick(index)}
                       className={`flex flex-col gap-2 py-2 px-0.5 h-[150px] w-[90px] items-center ${
                         selectedQuddy === index
-                          ? 'bg-[#DCC6B1] rounded-[15px] border border-[#787878]'
-                          : ''
+                          ? "bg-[#DCC6B1] rounded-[15px] border border-[#787878]"
+                          : ""
                       }`}
                     >
                       <img

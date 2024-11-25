@@ -34,7 +34,9 @@ const CounselingEncounterPage = () => {
             >
               편지 보내기
             </button>
-            <button className="w-[180px] h-[60px] rounded-[10px] bg-[#C79A76] text-[25px] font-extrabold">
+            <button
+             onClick={() => navigate("/counseling")}
+             className="w-[180px] h-[60px] rounded-[10px] bg-[#C79A76] text-[25px] font-extrabold">
               답장 보기
             </button>
           </div>

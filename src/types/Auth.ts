@@ -1,5 +1,5 @@
 export interface UserAuth {
-  userId: string;
+  kakaoId: string;
 }
 
 export interface AuthResponse {

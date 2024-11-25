@@ -42,10 +42,7 @@ export const getquddyTI = async (): Promise<QuiddyTI> => {
 export const checkTodayDiary = async (): Promise<UserDiary> => {
   try {
     const res = await get<UserDiary>(END_POINT.USER.CHECK_TODAY_DIARY);
-<<<<<<< HEAD
     console.log(res);
-=======
->>>>>>> a883c3425963b336b4a9d81e34eab73ff4303536
     return res.data;
   } catch (error) {
     throw new Error("데이터 불러오기에 실패하였습니다.");

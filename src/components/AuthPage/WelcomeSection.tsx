@@ -18,16 +18,12 @@ const WelcomeSection = () => {
 
   const handleLogin = async () => {
     try {
-<<<<<<< HEAD
-      const res = await postTestLogin({ kakaoId });
-      console.log(res);
-      const { accessToken, refreshToken } = res;
-      console.log(accessToken, refreshToken);
-=======
-      const res = await postTestLogin({ userId });
+      const authData = {
+        kakaoId: userId,
+      };
+      const res = await postTestLogin(authData);
       const { accessToken, refreshToken } = res;
 
->>>>>>> a883c3425963b336b4a9d81e34eab73ff4303536
       if (accessToken && refreshToken) {
         setTokens(accessToken, refreshToken); // 토큰 저장
         setAuthenticated(true); // 인증 상태 업데이트
@@ -83,13 +79,8 @@ const WelcomeSection = () => {
           <div className="font-medium text-[24px] w-[88px] ">아이디</div>
           <input
             className="border-[1px] border-black p-[10px] w-[390px] h-[40px] rounded-[7px]"
-<<<<<<< HEAD
-            value={kakaoId}
-            onChange={(e) => setKakaoId(e.target.value)}
-=======
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
->>>>>>> a883c3425963b336b4a9d81e34eab73ff4303536
             onKeyDown={handleKeyDown}
             placeholder="아이디를 입력하세요"
           />

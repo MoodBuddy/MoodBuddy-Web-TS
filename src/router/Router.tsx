@@ -73,7 +73,7 @@ const Router = () => (
           },
           { path: "/user", element: <ProtectedRoute element={<AuthPage />} /> },
           {
-            path: "/api/v1/user/login/oauth2/code/kakao",
+            path: "/api/v2/user/login/oauth2/code/kakao",
             element: <KakaoLoginAuth />,
           },
           {

@@ -33,10 +33,7 @@ export const postProfileEdit = async (
   formData: Profile
 ): Promise<ProfileEditResponse> => {
   try {
-    const res = await post<Profile>(
-      END_POINT.USER.POST_PROFILE_EDIT,
-      formData
-    );
+    const res = await post<Profile>(END_POINT.USER.POST_PROFILE_EDIT, formData);
     return res.data;
   } catch (error) {
     throw new Error("데이터 전송에 실패하였습니다.");
@@ -46,7 +43,7 @@ export const postProfileEdit = async (
 // firebase fcm-token (알림설정) api
 // export const postFcmToken = async (token) => {
 //   try {
-//     const data = await post("/api/v1/member/main/fcmToken", {
+//     const data = await post("/api/v2/member/main/fcmToken", {
 //       fcmToken: token,
 //     });
 //     return data;
@@ -65,7 +62,7 @@ export const postProfileEdit = async (
 //       Authorization: `Bearer ${token}`,
 //     };
 //     const data = await get(
-//       `/api/v1/user/login/oauth2/code/kakao?code=${code}`,
+//       `/api/v2/user/login/oauth2/code/kakao?code=${code}`,
 //       { headers }
 //     );
 //     console.log(data);

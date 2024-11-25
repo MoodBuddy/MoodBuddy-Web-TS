@@ -47,15 +47,15 @@ export const getquddyTI = async (): Promise<QuiddyTIResponse> => {
 };
 
 // 오늘 일기 작성 가능 여부 확인
-export const checkTodayDiary =
-  async (): Promise<UserDiary> => {
-    try {
-      const res = await get<UserDiary>(END_POINT.USER.CHECK_TODAY_DIARY);
-      return res.data.data;
-    } catch (error) {
-      throw new Error("데이터 불러오기에 실패하였습니다.");
-    }
-  };
+export const checkTodayDiary = async (): Promise<UserDiary> => {
+  try {
+    const res = await get<UserDiary>(END_POINT.USER.CHECK_TODAY_DIARY);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    throw new Error("데이터 불러오기에 실패하였습니다.");
+  }
+};
 
 // 월별 통계 보기
 export const getMonthStatic = async (

@@ -88,7 +88,7 @@ const NavBar = () => {
     removeImageFile([]);
 
     event.preventDefault(); // 기본 동작 방지
-    if (!diaryData.checkTodayDairy) {
+    if (diaryData && !diaryData.checkTodayDairy) {
       setIsModal(true);
     } else {
       navigate(to);

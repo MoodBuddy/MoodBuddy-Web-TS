@@ -7,4 +7,6 @@ export type BaseResponse<T> = {
   message?: string[];
   status: ResponseStatus;
   data: T;
+  accessToken: string;
+  refreshToken: string;
 };

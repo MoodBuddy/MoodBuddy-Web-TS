@@ -8,7 +8,7 @@ import Button from "../common/button/Button";
 import { getProfile } from "../../apis/user";
 import { useQuery } from "@tanstack/react-query";
 
-const Letter = () => {
+const Letter = (data) => {
   const { content, setContent } = useContentStore();
   const [sending, setSending] = useState(false);
   const isSending = () => {
@@ -20,8 +20,6 @@ const Letter = () => {
   //   queryKey: ['getProfile'],
   //   queryFn: getProfile,
   // });
-
-  const data = [];
 
   const todayDate = formatDate();
 
@@ -59,7 +57,7 @@ const Letter = () => {
                 setContent(e.target.value);
               }}
               placeholder={`${
-                letter.length === 0
+                data.data.userLetterNums === 0
                   ? `편지지가 없습니다
 오늘의 일기를 작성해주세요!
 
@@ -71,7 +69,7 @@ const Letter = () => {
             />
             <div className="self-end flex flex-col items-end font-medium text-xl gap-[10px] mr-10">
               <div>{todayDate}</div>
-              <div>From.{data.nickname}</div>
+              <div>From. {data.data.nickname}</div>
             </div>
           </div>
         </div>

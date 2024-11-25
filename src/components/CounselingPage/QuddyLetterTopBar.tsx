@@ -1,4 +1,4 @@
-import msg from '@assets/msg.svg';
+import happyQuddy from '@assets/happyQuddy.svg';
 import { formatDate } from '../../utils/format';
 
 const QuddyLetterTopBar = ({ data }) => {
@@ -16,15 +16,19 @@ const QuddyLetterTopBar = ({ data }) => {
   console.log(`간격이 ${secondsDifference}초입니다.`);
 
   return (
-    <div className="transform scale-[85%]">
-      <div className="flex items-center gap-[30px] w-[1570px] h-[95px] bg-[#F7F3EF] border-[3px] border-black transform scale-75 mt-12 rounded-[20px]">
-        <img className="ml-[67px]" src={msg} alt="message icon" />
-        <div className="font-meetme text-[40px]">
+    <div className='transform scale-[85%]'>
+      <div className='flex items-center gap-[30px] w-[1570px] h-[95px] transform scale-75 mt-8 mb-4 ml-10'>
+        <img
+          src={happyQuddy}
+          alt='happyQuddy'
+          className='w-[125px] h-[127px]'
+        />
+        <div className='font-meetme text-[70px]'>
           {secondsDifference > 30
             ? data.letterAnswerContent
-              ? `${formattedDate} | 쿼디에게 "${replyMessage}" 답장이 도착했어요`
-              : `${formattedDate} | 아직 답장이 도착하지 않았어요`
-            : `${formattedDate} | 아직 답장이 도착하지 않았어요`}
+              ? `제가 보낸 "${replyMessage}"의 편지가 도착했어요!`
+              : `아직 답장이 도착하지 않았어요 !`
+            : `아직 답장이 도착하지 않았어요 !`}
         </div>
       </div>
     </div>

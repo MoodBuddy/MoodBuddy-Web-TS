@@ -1,12 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLetter } from '../../apis/letter';
-import CounselingTopBar from '../../components/CounselingPage/CounselingTopBar';
 import MailBox from '../../components/CounselingPage/MailBox';
-import Profile from '../../components/CounselingPage/Profile';
 import Footer from '../../components/common/layout/Footer';
 import NavBar from '../../components/common/layout/NavBar';
 import styles from '@styles/check.module.css';
-import halfHappyQuddy from '@assets/halfHappyQuddy.svg';
 import CounselingLetterTopBar from '@components/CounselingPage/CheckLetterTopBar';
 
 const CounselingPage = () => {
